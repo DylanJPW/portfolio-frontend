@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Test Project 1",
+    "description": "This is a test project description.",
+    "image": {
+      "imageUrl": "https://via.placeholder.com/150",
+      "altText": "Test Project Image"
+    }
+  },
+  {
+    "title": "Test Project 2",
+    "description": "This is a test project description.",
+    "image": {
+      "imageUrl": "https://via.placeholder.com/150",
+      "altText": "Test Project Image"
+    }
+  }
+]
