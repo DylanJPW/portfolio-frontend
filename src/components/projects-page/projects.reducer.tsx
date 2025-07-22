@@ -20,6 +20,11 @@ export const getProjects = createAsyncThunk<any, void, IThunkAPI>(
   async (_, { signal }) => axios.get(requestURL + '/getAllProjects', { signal }),
 )
 
+export const addProject = createAsyncThunk<any, Project, IThunkAPI>(
+  "projects/addProject",
+  async(project, {signal}) => axios.post(requestURL + '/addProject', project, {signal}),
+)
+
 export const ProjectsSlice = createSlice({
   name: 'projects',
   initialState,

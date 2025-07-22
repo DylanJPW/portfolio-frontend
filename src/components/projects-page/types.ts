@@ -1,5 +1,5 @@
 export interface ProjectImage {
-  imageUrl: string;
+  imageUrl?: string;
   altText?: string;
 }
 
