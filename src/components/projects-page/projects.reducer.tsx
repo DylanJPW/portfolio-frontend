@@ -11,7 +11,7 @@ export interface ProjectsPageState {
 const initialState: ProjectsPageState = {
   loaded: false,
   projects: [] as Project[],
-};
+}
 
 const requestURL = 'api/projects';
 
@@ -23,6 +23,11 @@ export const getProjects = createAsyncThunk<any, void, IThunkAPI>(
 export const addProject = createAsyncThunk<any, Project, IThunkAPI>(
   "projects/addProject",
   async(project, {signal}) => axios.post(requestURL + '/addProject', project, {signal}),
+)
+
+export const deleteProject = createAsyncThunk<any, number, IThunkAPI>(
+  "projects/deleteProjects",
+  async(id, {signal}) => axios.delete(requestURL + `/deleteProject/${id}`, {signal}),
 )
 
 export const ProjectsSlice = createSlice({
