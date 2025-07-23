@@ -25,9 +25,11 @@ export const ProjectsPage = () => {
       <h1>Projects</h1>
       <p>This is the projects page content.</p>
       <Button variant="primary" onClick={() => setShowModal(true)}>Add Project</Button>
-      {loaded && Object.values(projects).map((project, index) => (
-        <ProjectCard key={index} {...project} />
-      ))}
+      <div className="project-list-container">
+        {loaded && Object.values(projects).map((project, index) => (
+          <ProjectCard key={index} {...project} />
+        ))}
+      </div>
       <AddProjectModal show={showModal} setShow={setShowModal}/>
     </div>
   );
