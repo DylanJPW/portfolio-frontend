@@ -3,22 +3,35 @@ import { Project } from "./types";
 import { useAppDispatch } from "../../config/store";
 import { deleteProject, getProjects } from "./projects.reducer";
 
-export const ProjectCard = ({ id, name, description, image, repoLink, tags }: Project) => {
+interface ProjectCardProps extends Project {
+  setShowEditModal: (value: boolean) => void;
+  setSelectedProjectId: (value: number) => void;
+}
+
+export const ProjectCard = ({ id, name, description, image, repoLink, tags, setShowEditModal, setSelectedProjectId }: ProjectCardProps) => {
   const dispatch = useAppDispatch();
 
-  const handleOnClick = async () => {
+  function handleOnClickEdit() {
+    setSelectedProjectId(id);
+    setShowEditModal(true);
+  }
+
+  async function handleOnClickDelete() {
     await dispatch(deleteProject(id));
     dispatch(getProjects());
   }
 
   return (
-    <div className="card">
-      <h2>{name}</h2>
-      {image?.imageUrl && <img src={image.imageUrl} alt={image.altText} width={300} height={200}/>}
-      <p>{description}</p>
-      <div>Link to Git Repo: {repoLink}</div>
-      <div>Tags: {tags?.join(", ")}</div>
-      <Button onClick={() => handleOnClick()}>Delete</Button>
+    <div className="card project-card">
+      <h2 className="project-name">{name}</h2>
+      {image?.imageUrl && <img className="project-image" src={image.imageUrl} alt={image.altText} width={300} height={200}/>}
+      <p className="project-description">{description}</p>
+      <div className="project-repo-link">Link to Git Repo: {repoLink}</div>
+      <div className="project-tags">Tags: {tags?.join(", ")}</div>
+      <div className="project-buttons-container d-flex flex-row">
+        <Button className="me-3" variant="secondary" onClick={() => handleOnClickEdit()}>Edit</Button>
+        <Button variant="outline-danger" onClick={() => handleOnClickDelete()}>Delete</Button>
+      </div>
     </div>
   );
 };
