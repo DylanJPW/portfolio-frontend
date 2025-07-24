@@ -30,6 +30,11 @@ export const deleteProject = createAsyncThunk<any, number, IThunkAPI>(
   async(id, {signal}) => axios.delete(requestURL + `/deleteProject/${id}`, {signal}),
 )
 
+export const updateProject = createAsyncThunk<any, Project, IThunkAPI>(
+  "projects/updateProject",
+  async(project, {signal}) => axios.put(requestURL + `/updateProject/${project.id}`, project, {signal})
+)
+
 export const ProjectsSlice = createSlice({
   name: 'projects',
   initialState,
