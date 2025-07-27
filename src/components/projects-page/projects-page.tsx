@@ -6,7 +6,12 @@ import { Button } from "react-bootstrap";
 import { AddProjectModal } from "./add-project-modal";
 import { Project } from "./types";
 
-export const ProjectsPage = () => {
+interface ProjectsPageProps {
+  isOverview?: boolean;
+  projectLimit?: number;
+}
+
+export const ProjectsPage = ({isOverview = false, projectLimit = 3}: ProjectsPageProps) => {
   const dispatch = useAppDispatch();
   const {projects, loaded} = useAppSelector((state) => state.projects);
 
@@ -27,13 +32,13 @@ export const ProjectsPage = () => {
   }
 
   return (
-    <div className="projects-page">
+    <div id="projects-section" className="container-fluid text-center section--height">
       <h1>Projects</h1>
       <p>This is the projects page content.</p>
-      <Button variant="primary" onClick={() => handleOnClickAdd()}>Add Project</Button>
-      <div className="project-list-container">
-        {loaded && Object.values(projects).map((project, index) => (
-          <ProjectCard key={index} {...project} setShowEditModal={setShowModal} setSelectedProjectId={setSelectedProjectId}/>
+      { !isOverview && <Button variant="primary" onClick={() => handleOnClickAdd()}>Add Project</Button>}
+      <div className="project-list container">
+        {loaded && Object.values(projects).splice(0, projectLimit).map((project, index) => (
+          <ProjectCard key={index} {...project} setShowEditModal={setShowModal} setSelectedProjectId={setSelectedProjectId} isOverview={isOverview}/>
         ))}
       </div>
       <AddProjectModal show={showModal} setShow={setShowModal} project={selectedProject}/>

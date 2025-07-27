@@ -6,9 +6,10 @@ import { deleteProject, getProjects } from "./projects.reducer";
 interface ProjectCardProps extends Project {
   setShowEditModal: (value: boolean) => void;
   setSelectedProjectId: (value: number) => void;
+  isOverview?: boolean;
 }
 
-export const ProjectCard = ({ id, name, description, image, repoLink, tags, setShowEditModal, setSelectedProjectId }: ProjectCardProps) => {
+export const ProjectCard = ({ id, name, description, image, repoLink, tags, setShowEditModal, setSelectedProjectId, isOverview = false }: ProjectCardProps) => {
   const dispatch = useAppDispatch();
 
   function handleOnClickEdit() {
@@ -28,10 +29,12 @@ export const ProjectCard = ({ id, name, description, image, repoLink, tags, setS
       <p className="project-description">{description}</p>
       <div className="project-repo-link">Link to Git Repo: {repoLink}</div>
       <div className="project-tags">Tags: {tags?.join(", ")}</div>
-      <div className="project-buttons-container d-flex flex-row">
-        <Button className="me-3" variant="secondary" onClick={() => handleOnClickEdit()}>Edit</Button>
-        <Button variant="outline-danger" onClick={() => handleOnClickDelete()}>Delete</Button>
-      </div>
+      { !isOverview && 
+        <div className="project-buttons-container d-flex flex-row">
+          <Button className="me-3" variant="secondary" onClick={() => handleOnClickEdit()}>Edit</Button>
+          <Button variant="outline-danger" onClick={() => handleOnClickDelete()}>Delete</Button>
+        </div>
+      }
     </div>
   );
 };
