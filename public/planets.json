@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Sun",
+        "x": 0,
+        "y": 0,
+        "colour": "#FFFF00",
+        "mass": 1.98892e30,
+        "radius": 30,
+        "init_vel": 0,
+        "sun": true
+    },
+    {
+        "name": "Mercury",
+        "x": 0.39,
+        "y": 0,
+        "colour": "#808000",
+        "mass": 3.3e23,
+        "radius": 3,
+        "init_vel": 47.4,
+        "sun": false
+    },
+    {
+        "name": "Venus",
+        "x": 0.72,
+        "y": 0,
+        "colour": "#DAA520",
+        "mass": 4.8685e24,
+        "radius": 10,
+        "init_vel": 35.02,
+        "sun": false
+    },
+    {
+        "name": "Earth",
+        "x": 1,
+        "y": 0,
+        "colour": "#0000FF",
+        "mass": 5.9742e24,
+        "radius": 10,
+        "init_vel": 29.783,
+        "sun": false
+    },
+    {
+        "name": "Mars",
+        "x": 1.52,
+        "y": 0,
+        "colour": "#FF0000",
+        "mass": 6.39e23,
+        "radius": 5,
+        "init_vel": 24.077,
+        "sun": false
+    },
+    {
+        "name": "Jupiter",
+        "x": 5.2,
+        "y": 0,
+        "colour": "#FFA500",
+        "mass": 1.8997956e27,
+        "radius": 25,
+        "init_vel": 13.07,
+        "sun": false
+    },
+    {
+        "name": "Saturn",
+        "x": 9.54,
+        "y": 0,
+        "colour": "#F0E68C",
+        "mass": 5.6832e26,
+        "radius": 22,
+        "init_vel": 9.7,
+        "sun": false
+    },
+    {
+        "name": "Uranus",
+        "x": 19.22,
+        "y": 0,
+        "colour": "#00FFFF",
+        "mass": 8.68e25,
+        "radius": 18,
+        "init_vel": 6.8,
+        "sun": false
+    },
+    {
+        "name": "Neptune",
+        "x": 30.06,
+        "y": 0,
+        "colour": "#0000CD",
+        "mass": 1.02e26,
+        "radius": 18,
+        "init_vel": 5.4,
+        "sun": false
+    },
+    {
+        "name": "Pluto",
+        "x": 39,
+        "y": 0,
+        "colour": "#800080",
+        "mass": 1.3e22,
+        "radius": 3,
+        "init_vel": 4.7,
+        "sun": false
+    }
+]
