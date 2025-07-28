@@ -10,9 +10,9 @@ export const Header = () => {
       </Navbar.Brand>
       <Navbar.Collapse>
         <Nav>
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#about-me-section">About Me</Nav.Link>
-          <Nav.Link href="#projects-section">Projects</Nav.Link>
+          <Nav.Link href="/#home">Home</Nav.Link>
+          <Nav.Link href="/#about-me-section">About Me</Nav.Link>
+          <Nav.Link href="/#projects-section">Projects</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

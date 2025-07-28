@@ -23,7 +23,7 @@ export const ProjectCard = ({ id, name, description, image, repoLink, tags, setS
   }
 
   return (
-    <div className="card project-card">
+    <div className="card project-card col d-flex flex-column align-items-center mx-3">
       <h2 className="project-name">{name}</h2>
       {image?.imageUrl && <img className="project-image" src={image.imageUrl} alt={image.altText} width={300} height={200}/>}
       <p className="project-description">{description}</p>

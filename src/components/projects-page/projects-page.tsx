@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../config/store";
 import { Button } from "react-bootstrap";
 import { AddProjectModal } from "./add-project-modal";
 import { Project } from "./types";
+import './project-page.scss';
 
 interface ProjectsPageProps {
   isOverview?: boolean;
@@ -32,13 +33,13 @@ export const ProjectsPage = ({isOverview = false, projectLimit = 3}: ProjectsPag
   }
 
   return (
-    <div id="projects-section" className="container-fluid text-center section--height">
+    <div id="projects-section" className="container-fluid d-flex flex-column text-center align-items-center justify-content-center section--height">
       <h1>Projects</h1>
       <p>This is the projects page content.</p>
       { !isOverview && <Button variant="primary" onClick={() => handleOnClickAdd()}>Add Project</Button>}
-      <div className="project-list container">
+      <div className="project-list container d-flex justify-content-center row row-cols-3 gx-5">
         {loaded && Object.values(projects).splice(0, projectLimit).map((project, index) => (
-          <ProjectCard key={index} {...project} setShowEditModal={setShowModal} setSelectedProjectId={setSelectedProjectId} isOverview={isOverview}/>
+            <ProjectCard key={index} {...project} setShowEditModal={setShowModal} setSelectedProjectId={setSelectedProjectId} isOverview={isOverview}/>
         ))}
       </div>
       <AddProjectModal show={showModal} setShow={setShowModal} project={selectedProject}/>
