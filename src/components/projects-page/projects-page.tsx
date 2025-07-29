@@ -33,7 +33,7 @@ export const ProjectsPage = ({isOverview = false, projectLimit = 3}: ProjectsPag
   }
 
   return (
-    <div id="projects-section" className="container-fluid d-flex flex-column text-center align-items-center justify-content-center section--height">
+    <div id="projects-section" className="container-fluid d-flex flex-column text-center align-items-center justify-content-center section--height bg-light">
       <h1>Projects</h1>
       <p>This is the projects page content.</p>
       { !isOverview && <Button variant="primary" onClick={() => handleOnClickAdd()}>Add Project</Button>}
