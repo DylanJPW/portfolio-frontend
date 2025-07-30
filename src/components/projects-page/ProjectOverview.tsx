@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap"
-import { AddProjectModal } from "./add-project-modal"
-import { ProjectCard } from "./project-card"
+import { AddProjectModal } from "./AddProjectModal"
+import { ProjectCard } from "./ProjectCard"
 import { useState, useMemo, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { getProjects } from "./projects.reducer";

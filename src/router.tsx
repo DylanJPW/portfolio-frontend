@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import { HomePage } from "./components/home-page/home-page"
-import { AboutMePage } from "./components/about-me-page/about-me-page"
-import { ProjectsPage } from "./components/projects-page/projects-page"
+import { HomePage } from "./components/home-page/HomePage"
+import { AboutMePage } from "./components/about-me-page/AboutMePage"
+import { ProjectsPage } from "./components/projects-page/ProjectsPage"
 
 
 export const Router = () => {

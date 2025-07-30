@@ -1,7 +1,6 @@
-import React from "react";
 import {Navbar, Nav} from "react-bootstrap";
-import "./header.scss";
-import { SocialMediaLinks } from "../shared/social-media-links";
+import { SocialMediaLinks } from "../shared/SocialMediaLinks";
+import "./Header.scss";
 
 export const Header = () => {
   return (
