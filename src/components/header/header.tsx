@@ -9,9 +9,10 @@ export const Header = () => {
         My Portfolio
       </Navbar.Brand>
       <Navbar.Collapse className="justify-content-between">
-        <Nav>
+        <Nav className="align-items-center">
           <Nav.Link href="/#home">Home</Nav.Link>
           <Nav.Link href="/#projects-section">Projects</Nav.Link>
+          <Nav.Link className="d-flex align-items-center">Upload CV<i className="bi bi-upload fs-5 text-secondary ps-2" /></Nav.Link>
         </Nav>
         <Navbar.Text >
           <SocialMediaLinks/>

@@ -11,32 +11,35 @@ export interface ProjectsPageState {
 const initialState: ProjectsPageState = {
   loaded: false,
   projects: [] as Project[],
-}
+};
 
-const requestURL = 'api/projects';
+const requestURL = "api/projects";
 
 export const getProjects = createAsyncThunk<any, void, IThunkAPI>(
   "projects/getProjects",
-  async (_, { signal }) => axios.get(requestURL + '/getAllProjects', { signal }),
-)
+  async (_, { signal }) => axios.get(requestURL + "/getAllProjects", { signal })
+);
 
 export const addProject = createAsyncThunk<any, Project, IThunkAPI>(
   "projects/addProject",
-  async(project, {signal}) => axios.post(requestURL + '/addProject', project, {signal}),
-)
+  async (project, { signal }) =>
+    axios.post(requestURL + "/addProject", project, { signal })
+);
 
 export const deleteProject = createAsyncThunk<any, number, IThunkAPI>(
   "projects/deleteProjects",
-  async(id, {signal}) => axios.delete(requestURL + `/deleteProject/${id}`, {signal}),
-)
+  async (id, { signal }) =>
+    axios.delete(requestURL + `/deleteProject/${id}`, { signal })
+);
 
 export const updateProject = createAsyncThunk<any, Project, IThunkAPI>(
   "projects/updateProject",
-  async(project, {signal}) => axios.put(requestURL + `/updateProject/${project.id}`, project, {signal})
-)
+  async (project, { signal }) =>
+    axios.put(requestURL + `/updateProject/${project.id}`, project, { signal })
+);
 
 export const ProjectsSlice = createSlice({
-  name: 'projects',
+  name: "projects",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -52,7 +55,7 @@ export const ProjectsSlice = createSlice({
         state.loaded = false;
         state.projects = [];
       });
-  }
+  },
 });
 
 export default ProjectsSlice.reducer;
