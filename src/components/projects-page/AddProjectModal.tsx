@@ -10,11 +10,15 @@ interface AddProjectModalProps {
   project: Project;
 }
 
-export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) => {
+export const AddProjectModal = ({
+  show,
+  setShow,
+  project,
+}: AddProjectModalProps) => {
   const dispatch = useAppDispatch();
 
   const [newProject, setNewProject] = useState<Project>({} as Project);
-  
+
   useEffect(() => {
     setNewProject(project);
   }, [project]);
@@ -31,13 +35,17 @@ export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) 
     setShow(false);
   }
 
-  const title = useMemo<string>(() => project?.id ? `Edit Project ${project.name}` : 'Add Project', [show]);
+  const title = useMemo<string>(
+    () => (project?.id ? `Edit Project ${project.name}` : "Add Project"),
+    [show]
+  );
 
-  return (<Modal show={show}>
-    <Modal.Header closeButton onHide={() => handleOnClose()}>
-      <Modal.Title>{title}</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
+  return (
+    <Modal show={show}>
+      <Modal.Header closeButton onHide={() => handleOnClose()}>
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Project Name</Form.Label>
@@ -45,7 +53,9 @@ export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) 
               type="text"
               defaultValue={project.name}
               value={newProject.name}
-              onChange={(e) => setNewProject({...newProject, name: e.target.value})}
+              onChange={(e) =>
+                setNewProject({ ...newProject, name: e.target.value })
+              }
               placeholder="Enter project name"
               required
             />
@@ -58,7 +68,9 @@ export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) 
               rows={3}
               defaultValue={project.description}
               value={newProject.description}
-              onChange={(e) => setNewProject({...newProject, description: e.target.value})}
+              onChange={(e) =>
+                setNewProject({ ...newProject, description: e.target.value })
+              }
               placeholder="Enter description"
               required
             />
@@ -70,7 +82,9 @@ export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) 
               type="url"
               defaultValue={project.repoLink}
               value={newProject.repoLink}
-              onChange={(e) => setNewProject({...newProject, repoLink: e.target.value})}
+              onChange={(e) =>
+                setNewProject({ ...newProject, repoLink: e.target.value })
+              }
               placeholder="https://github.com/..."
             />
           </Form.Group>
@@ -81,7 +95,12 @@ export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) 
               type="text"
               defaultValue={project.tags}
               value={newProject.tags}
-              onChange={(e) => setNewProject({...newProject, tags: e.target.value.replace(' ', '').split(',')})}
+              onChange={(e) =>
+                setNewProject({
+                  ...newProject,
+                  tags: e.target.value.replace(" ", "").split(","),
+                })
+              }
               placeholder="React, Spring Boot, Fullstack"
             />
           </Form.Group>
@@ -92,21 +111,36 @@ export const AddProjectModal = ({show, setShow, project}: AddProjectModalProps) 
               type="url"
               defaultValue={project.image?.imageUrl}
               value={newProject.image?.imageUrl}
-              onChange={(e) => setNewProject({...newProject, image: {...newProject.image, imageUrl: e.target.value}})}
+              onChange={(e) =>
+                setNewProject({
+                  ...newProject,
+                  image: { ...newProject.image, imageUrl: e.target.value },
+                })
+              }
             />
             <Form.Label>Image Alt Text</Form.Label>
             <Form.Control
               type="text"
               defaultValue={project.image?.altText}
               value={newProject.image?.altText}
-              onChange={(e) =>  setNewProject({...newProject, image: {...newProject.image, altText: e.target.value}})}
+              onChange={(e) =>
+                setNewProject({
+                  ...newProject,
+                  image: { ...newProject.image, altText: e.target.value },
+                })
+              }
             />
           </Form.Group>
         </Form>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={() => handleOnClose()}>Close</Button>
-      <Button variant="primary" onClick={() => handleOnSave()}>Save Changes</Button>
-    </Modal.Footer>
-  </Modal>);
-}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => handleOnClose()}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={() => handleOnSave()}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
