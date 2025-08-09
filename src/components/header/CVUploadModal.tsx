@@ -17,7 +17,8 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   }
 
   function handleSubmit() {
-		// dispatch(uploadCV(cvFile));
+		dispatch(uploadCV(cvFile as File));
+    handleOnClose();
   }
 
   return (
@@ -29,7 +30,14 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
         <Form>
           <Form.Group>
             <Form.Label>Upload your CV (.pdf)</Form.Label>
-            <Form.Control type="file" accept=".pdf" onChange={(e) => console.log(e.target)}/>
+            <Form.Control
+              type="file"
+              accept=".pdf"
+              onChange={(e) => {
+                const input = e.target as HTMLInputElement;
+                setCVFile(input.files?.[0])
+              }}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
