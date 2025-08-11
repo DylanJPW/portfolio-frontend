@@ -1,6 +1,6 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../../config/store";
-import { uploadCV } from "../../reducers/cv.reducer";
+import { uploadCV } from "./cv.reducer";
 import { useState } from "react";
 
 interface CVUploadModalProps {
