@@ -1,7 +1,7 @@
 import {Navbar, Nav} from "react-bootstrap";
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import "./Header.scss";
-import { CVUploadModal } from "./CVUploadModal";
+import { CVUploadModal } from "../cv/CVUploadModal";
 import { useState } from "react";
 
 export const Header = () => {
@@ -14,7 +14,7 @@ export const Header = () => {
 
   return (
     <>
-    <Navbar className="header w-100 position-fixed top-0 px-3">
+    <Navbar className="header z-1 bg-body-secondary w-100 position-fixed top-0 px-3 ">
       <Navbar.Brand href="/">
         My Portfolio
       </Navbar.Brand>

@@ -3,12 +3,12 @@ import { Project } from "./types";
 import axios from "axios";
 import { IThunkAPI } from "../../config/store";
 
-export interface ProjectsPageState {
+export interface ProjectsPageInitialState {
   loaded: boolean;
   projects: Project[];
 }
 
-const initialState: ProjectsPageState = {
+const initialState: ProjectsPageInitialState = {
   loaded: false,
   projects: [] as Project[],
 };

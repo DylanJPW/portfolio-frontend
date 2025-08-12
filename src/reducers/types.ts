@@ -1,5 +1,5 @@
-import { ProjectsPageState } from "../components/projects-page/projects.reducer";
+import { ProjectsPageInitialState } from "../components/projects-page/projects.reducer";
 
 export interface RootState {
-  projects: ProjectsPageState;
+  projects: ProjectsPageInitialState;
 }

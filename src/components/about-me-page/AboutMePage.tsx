@@ -1,8 +1,22 @@
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import { SkillsAccordion } from "./SkillsAccordion";
 import './AboutMePage.scss'
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../config/store";
+import { getCV } from "../cv/cv.reducer";
 
 export const AboutMePage = () => {
+  const dispatch = useAppDispatch();
+  const { cv, loaded } = useAppSelector((state) => state.cv)
+
+  useEffect(() => {
+    dispatch(getCV(1));
+  }, []);
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <div
       id="about-me-section"
@@ -18,11 +32,7 @@ export const AboutMePage = () => {
         <div className="col d-flex flex-column border-end border-3 justify-content-center">
           <h2>About Me</h2>
           <p className="px-5">
-            I am a highly motivated software developer, having worked in
-            developer roles since passing Enterprise Computing in DCU. With
-            knowledge of Agile methodologies and having experienced working with
-            many people in an ever-changing environment, I understand how to
-            work as part of a team and should slot in easily.
+            {cv.summary.trim()}
           </p>
         </div>
         <div className="col">
@@ -36,7 +46,7 @@ export const AboutMePage = () => {
         </div>
       </div>
       <div id="skills" className="row w-100 pt-4">
-        <SkillsAccordion />
+        <SkillsAccordion cvData={cv}/>
       </div>
     </div>
   );
