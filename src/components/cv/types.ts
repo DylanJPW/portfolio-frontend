@@ -1,8 +1,9 @@
 export interface CVObject {
   id: number;
   summary: string;
-  experience: ExperienceObject[];
-  Skills: SkillObject[];
+  experienceList: ExperienceObject[];
+  skillList: SkillObject[];
+  uploadDate: Date;
 }
 
 export interface ExperienceObject {
@@ -17,14 +18,13 @@ export interface ExperienceObject {
 
 export interface SkillObject {
   id: number;
-  cvId: number;
   name: string;
-  skillType: SkillType;
+  type: SkillType;
   yearsExpereince: number;
   description: string;
 }
 
-enum SkillType {
-  SOFT = 'Soft',
-  HARD = 'Hard',
+export enum SkillType {
+  SOFT = 'SOFT',
+  HARD = 'HARD',
 }

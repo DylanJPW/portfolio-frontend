@@ -1,6 +1,55 @@
 import { Accordion, Col, Container, Row } from "react-bootstrap";
+import {
+  CVObject,
+  ExperienceObject,
+  SkillObject,
+  SkillType,
+} from "../cv/types";
 
-export const SkillsAccordion = () => {
+interface ExperienceItemProps {
+  experienceItem: ExperienceObject;
+}
+
+const ExperienceItem = ({ experienceItem }: ExperienceItemProps) => {
+  const { companyName, position, startDate, endDate, description } =
+    experienceItem;
+
+  const dateRange = `${startDate} - ${endDate ?? "Current"}`;
+
+  return (
+    <Row className="align-items-center border-bottom py-2">
+      <Col>
+        <h4>
+          {companyName}, {position}
+        </h4>
+        <h5>{dateRange}</h5>
+      </Col>
+      <Col>{description}</Col>
+    </Row>
+  );
+};
+
+function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
+  const techSkills = [] as SkillObject[];
+  const softSkills = [] as SkillObject[];
+
+  skills.forEach((skill) =>
+    skill.type === SkillType.HARD
+      ? techSkills.push(skill)
+      : softSkills.push(skill)
+  );
+
+  return [techSkills, softSkills];
+}
+
+interface SkillsAccordionProps {
+  cvData: CVObject;
+}
+
+export const SkillsAccordion = ({ cvData }: SkillsAccordionProps) => {
+  const { skillList, experienceList } = cvData;
+  const [techSkills, softSkills] = splitSkills(skillList);
+
   return (
     <Accordion>
       <Accordion.Item eventKey="0">
@@ -10,21 +59,17 @@ export const SkillsAccordion = () => {
             <Col>
               <h3>Technical Skills</h3>
               <ul>
-                <li>Typescript, React</li>
-                <li>Unit testing, JUnit </li>
-                <li>Java, Spring Boot </li>
-                <li>SQL</li>
-                <li>Git, Bitbucket</li>
+                {Object.values(techSkills).map((skill) => (
+                  <li>{skill.name}</li>
+                ))}
               </ul>
             </Col>
             <Col>
               <h3>Soft Skills</h3>
               <ul>
-                <li>Communication</li>
-                <li>Teamworking </li>
-                <li>Problem Solving</li>
-                <li>Quick Learning</li>
-                <li>Good Attention to Detail</li>
+                {Object.values(softSkills).map((skill) => (
+                  <li>{skill.name}</li>
+                ))}
               </ul>
             </Col>
           </Row>
@@ -43,43 +88,9 @@ export const SkillsAccordion = () => {
               </Col>
             </Row>
             <Row className="align-items-center">
-              <Col>
-                <h4>IT CONSULTANT, FDM GROUP</h4>
-                <h5>4th September 2023 - Current</h5>
-              </Col>
-              <Col>
-                <ul>
-                  <li>
-                    I am currently working as an IT Consultant, on placement as
-                    a fullstack Java developer for Citibank Belfast.
-                  </li>
-                  <li>
-                    I have been working on an internal application with a major
-                    focus on the frontend, making use of React and Jest, with
-                    some backend work as well, involving Java, Spring, and SQL.
-                  </li>
-                  <li>
-                    As part of an agile team, I have become very familiar with
-                    the agile way of working, taking part in daily standups,
-                    grooming sessions, retrospectives, and working through
-                    sprints.
-                  </li>
-                  <li>
-                    I've also made significant use of Git and Bitbucket for
-                    version control, reviewing other developers' code and having
-                    my own work reviewed.
-                  </li>
-                  <li>
-                    Before being placed, I went through 3 months of software
-                    development training.
-                  </li>
-                  <li>
-                    I covered OOP using Java, JavaScript, SQL, web design with
-                    the Spring Framework and React, testing with JUnit, the
-                    Agile Framework, and other topics.
-                  </li>
-                </ul>
-              </Col>
+              {experienceList.map((experience) => (
+                <ExperienceItem experienceItem={experience} />
+              ))}
             </Row>
           </Container>
         </Accordion.Body>
