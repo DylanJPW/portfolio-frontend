@@ -1,6 +1,6 @@
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import { SkillsAccordion } from "./SkillsAccordion";
-import './AboutMePag.scss'
+import './AboutMePage.scss'
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { getCV } from "../cv/cv.reducer";
