@@ -1,16 +1,31 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isFulfilled, isPending, isRejected } from "@reduxjs/toolkit";
 import axios from "axios";
 import { IThunkAPI } from "../../config/store";
-import { CVObject } from "./types";
+import { CVObject, SkillType } from "./types";
+import mockCVData from "./mock-cv-info.json"
+
+const mockCV: CVObject = {
+  ...mockCVData,
+  experienceList: mockCVData.experienceList.map((exp) => ({
+    ...exp,
+    startDate: new Date(exp.startDate),
+    endDate: exp.endDate ? new Date(exp.endDate) : null,
+  })),
+  skillList: mockCVData.skillList.map((skill) => ({
+    ...skill,
+    type: skill.type as SkillType,
+  })),
+  uploadDate: new Date(mockCVData.uploadDate),
+};
 
 interface CVInitialState {
   loaded: boolean;
-  cv: CVObject;
+  selectedCV: CVObject;
 }
 
 const initialState: CVInitialState  = {
-  loaded: false,
-  cv: {} as CVObject,
+  loaded: true,
+  selectedCV: mockCV as CVObject,
 }
 
 const requestURL = "api/cv";
@@ -28,9 +43,14 @@ export const uploadCV = createAsyncThunk<any, File, IThunkAPI>(
   }
 );
 
-export const getCV = createAsyncThunk<any, number, IThunkAPI>(
+export const getCVById = createAsyncThunk<any, number, IThunkAPI>(
   "cv/getCV",
   async (cvId, {signal}) => axios.get(requestURL + `/getCV/${cvId}`, {signal})
+);
+
+export const getLatestCV = createAsyncThunk<any, void, IThunkAPI>(
+  "cv/getCV",
+  async (_, {signal}) => axios.get(requestURL + `/getLatestCV`, {signal})
 );
 
 export const CVSlice = createSlice({
@@ -39,16 +59,17 @@ export const CVSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCV.pending, (state) => {
+      .addMatcher(isPending(getCVById, getLatestCV), (state) => {
         state.loaded = false;
+        state.selectedCV = {} as CVObject;
       })
-      .addCase(getCV.fulfilled, (state, action) => {
+      .addMatcher(isFulfilled(getCVById, getLatestCV), (state, action) => {
         state.loaded = true;
-        state.cv = action.payload.data;
+        state.selectedCV = action.payload.data;
       })
-      .addCase(getCV.rejected, (state) => {
+      .addMatcher(isRejected(getCVById, getLatestCV), (state) => {
         state.loaded = false;
-        state.cv = {} as CVObject;
+        state.selectedCV = mockCV as CVObject;
       });
   },
 });
