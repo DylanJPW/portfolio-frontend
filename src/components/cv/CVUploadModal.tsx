@@ -1,6 +1,6 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../../config/store";
-import { uploadCV } from "./cv.reducer";
+import { getLatestCV, uploadCV } from "./cv.reducer";
 import { useState } from "react";
 
 interface CVUploadModalProps {
@@ -16,8 +16,9 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
     setShow(false);
   }
 
-  function handleSubmit() {
-		dispatch(uploadCV(cvFile as File));
+  async function handleSubmit() {
+		await dispatch(uploadCV(cvFile as File));
+    dispatch(getLatestCV());
     handleOnClose();
   }
 

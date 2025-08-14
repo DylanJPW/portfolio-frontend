@@ -17,7 +17,7 @@ const ExperienceItem = ({ experienceItem }: ExperienceItemProps) => {
   const dateRange = `${startDate} - ${endDate ?? "Current"}`;
 
   return (
-    <Row className="align-items-center border-bottom py-2">
+    <Row className="align-items-center border-top py-2">
       <Col>
         <h4>
           {companyName}, {position}
@@ -58,17 +58,17 @@ export const SkillsAccordion = ({ cvData }: SkillsAccordionProps) => {
           <Row>
             <Col>
               <h3>Technical Skills</h3>
-              <ul>
+              <ul className="list-group list-group-flush">
                 {Object.values(techSkills).map((skill) => (
-                  <li>{skill.name}</li>
+                  <li className="list-group-item">{skill.name}</li>
                 ))}
               </ul>
             </Col>
             <Col>
               <h3>Soft Skills</h3>
-              <ul>
+              <ul className="list-group list-group-flush">
                 {Object.values(softSkills).map((skill) => (
-                  <li>{skill.name}</li>
+                  <li className="list-group-item">{skill.name}</li>
                 ))}
               </ul>
             </Col>
