@@ -7,7 +7,6 @@ export interface CVObject {
 }
 
 export interface ExperienceObject {
-  id: number;
   companyName: string;
   position: string;
   startDate: Date;
@@ -16,7 +15,6 @@ export interface ExperienceObject {
 }
 
 export interface SkillObject {
-  id: number;
   name: string;
   type: SkillType;
   yearsExperience: number;

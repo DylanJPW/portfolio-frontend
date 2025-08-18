@@ -1,0 +1,103 @@
+import { Button, CloseButton, Col, Form, Row } from "react-bootstrap";
+import { ExperienceObject } from "../types";
+import { useState } from "react";
+
+interface ExperienceItemFormProps {
+  experienceItem: ExperienceObject;
+  index: number;
+  handleRemoveExperience: (indexToRemove: number) => void;
+  handleUpdateExperience: (
+    updatedExperience: ExperienceObject,
+    indexToUpdate: number
+  ) => void;
+}
+
+export const ExperienceItemForm = ({
+  experienceItem,
+  index,
+  handleRemoveExperience,
+  handleUpdateExperience,
+}: ExperienceItemFormProps) => {
+  const { companyName, position, startDate, endDate, description } =
+    experienceItem;
+
+  const updatedItem = experienceItem;
+
+  const [isCurrentPosition, setIsCurrentPosition] = useState<boolean>(!endDate ? true : false);
+
+  return (
+    <Form.Group>
+      <Form.Group className="pt-3">
+        <div className="d-flex justify-content-between">
+          <Form.Label>Company Name</Form.Label>
+          <CloseButton onClick={() => handleRemoveExperience(index)} />
+        </div>
+        <Form.Control
+          type="text"
+          value={companyName}
+          onChange={(e) => {
+            updatedItem.companyName = e.target.value;
+            handleUpdateExperience(updatedItem, index);
+          }}
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group className="pt-3">
+        <Form.Label>Position</Form.Label>
+        <Form.Control
+          type="text"
+          value={position}
+          onChange={(e) => {
+            updatedItem.position = e.target.value;
+            handleUpdateExperience(updatedItem, index);
+          }}
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group className="pt-3">
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          value={description}
+          onChange={(e) => {
+            updatedItem.description = e.target.value;
+            handleUpdateExperience(updatedItem, index);
+          }}
+        ></Form.Control>
+      </Form.Group>
+      <div className="d-flex align-items-center justify-content-between pt-3">
+        <Form.Group className="d-flex align-items-center">
+          <Form.Label className="mb-0 pe-3">Start Date:</Form.Label>
+          <Form.Control
+            className="w-auto"
+            type="date"
+            value={startDate ? startDate.toISOString().split("T")[0] : ""}
+            onChange={(e) => {
+              updatedItem.startDate = new Date(e.target.value);
+              handleUpdateExperience(updatedItem, index);
+            }}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className="d-flex align-items-center">
+          <Form.Label className="mb-0 pe-3">End Date:</Form.Label>
+          <Form.Control
+            className="w-auto"
+            type="date"
+            value={endDate ? endDate.toISOString().split("T")[0] : ""}
+            onChange={(e) => {
+              updatedItem.endDate = new Date(e.target.value);
+              handleUpdateExperience(updatedItem, index);
+            }}
+            disabled={isCurrentPosition}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className="d-flex">
+          <Form.Check
+            label="Current position?"
+            checked={isCurrentPosition}
+            onChange={(e) => setIsCurrentPosition(e.target.checked)}
+          ></Form.Check>
+        </Form.Group>
+      </div>
+    </Form.Group>
+  );
+};
