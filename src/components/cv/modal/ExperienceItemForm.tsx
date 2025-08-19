@@ -21,13 +21,17 @@ export const ExperienceItemForm = ({
   const { companyName, position, startDate, endDate, description } =
     experienceItem;
 
+
+  console.log("Test startDate:", typeof startDate);
+
+
   const updatedItem = experienceItem;
 
   const [isCurrentPosition, setIsCurrentPosition] = useState<boolean>(!endDate ? true : false);
 
   return (
     <Form.Group>
-      <Form.Group className="pt-3">
+      <Form.Group className="pt-2">
         <div className="d-flex justify-content-between">
           <Form.Label>Company Name</Form.Label>
           <CloseButton onClick={() => handleRemoveExperience(index)} />
@@ -70,9 +74,9 @@ export const ExperienceItemForm = ({
           <Form.Control
             className="w-auto"
             type="date"
-            value={startDate ? startDate.toISOString().split("T")[0] : ""}
+            value={startDate}
             onChange={(e) => {
-              updatedItem.startDate = new Date(e.target.value);
+              updatedItem.startDate = new Date(e.target.value).toISOString().split("T")[0];
               handleUpdateExperience(updatedItem, index);
             }}
           ></Form.Control>
@@ -82,9 +86,9 @@ export const ExperienceItemForm = ({
           <Form.Control
             className="w-auto"
             type="date"
-            value={endDate ? endDate.toISOString().split("T")[0] : ""}
+            value={endDate ?? ""}
             onChange={(e) => {
-              updatedItem.endDate = new Date(e.target.value);
+              updatedItem.endDate = new Date(e.target.value).toISOString().split("T")[0];
               handleUpdateExperience(updatedItem, index);
             }}
             disabled={isCurrentPosition}

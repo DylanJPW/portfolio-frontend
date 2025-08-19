@@ -6,11 +6,6 @@ import mockCVData from "./mock-cv-info.json"
 
 const mockCV: CVObject = {
   ...mockCVData,
-  experienceList: mockCVData.experienceList.map((exp) => ({
-    ...exp,
-    startDate: new Date(exp.startDate),
-    endDate: exp.endDate ? new Date(exp.endDate) : null,
-  })),
   skillList: mockCVData.skillList.map((skill) => ({
     ...skill,
     type: skill.type as SkillType,

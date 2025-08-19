@@ -1,7 +1,7 @@
 import {Navbar, Nav} from "react-bootstrap";
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import "./Header.scss";
-import { CVUploadModal } from "../cv/modal/CVUploadModal";
+import { CVUploadModal } from "../cv/modal/EditPageModal";
 import { useState } from "react";
 
 export const Header = () => {

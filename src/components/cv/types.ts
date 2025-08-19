@@ -9,8 +9,8 @@ export interface CVObject {
 export interface ExperienceObject {
   companyName: string;
   position: string;
-  startDate: Date;
-  endDate: Date | null;
+  startDate: string;
+  endDate: string | null;
   description: string;
 }
 

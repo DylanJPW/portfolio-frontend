@@ -18,13 +18,11 @@ export const SkillItemForm = ({
   const { name, description, type, yearsExperience } = skillItem;
   const isTechSkill = useMemo<boolean>(() => type === SkillType.HARD, [type]);
   
-  console.log("Test isTechSkill:", isTechSkill);
-
   const updatedItem = skillItem;
 
   return (
     <Form.Group>
-      <Form.Group className="pt-3">
+      <Form.Group className="pt-2">
         <div className="d-flex justify-content-between">
           <Form.Label>Name</Form.Label>
           <CloseButton onClick={() => handleRemoveSkill(index)} />

@@ -1,11 +1,11 @@
 import { Button, Form, Modal } from "react-bootstrap";
-import { useAppDispatch } from "../../../config/store";
+import { useAppDispatch, useAppSelector } from "../../../config/store";
 import { getLatestCV, uploadCV } from "../cv.reducer";
 import { useState } from "react";
-import { ExperienceObject, SkillObject, SkillType } from "../types";
+import { CVObject, ExperienceObject, SkillObject, SkillType } from "../types";
 import { SkillItemForm } from "./SkillItemForm";
 import { ExperienceItemForm } from "./ExperienceItemForm";
-import "./modal.scss";
+import "./EditPageModal.scss";
 
 interface CVUploadModalProps {
   show: boolean;
@@ -14,6 +14,9 @@ interface CVUploadModalProps {
 
 export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   const dispatch = useAppDispatch();
+  const { selectedCV } = useAppSelector((state) => state.cv);
+
+  const pageContent: CVObject = structuredClone(selectedCV);
   const [cvFile, setCVFile] = useState<File | undefined>(undefined);
 
   const defaultSkillItem: SkillObject = {
@@ -26,45 +29,39 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   const defaultExperienceItem: ExperienceObject = {
     companyName: "",
     position: "",
-    startDate: new Date(),
+    startDate: (new Date().toISOString().split("T")[0]),
     endDate: null,
     description: "",
   };
 
-  const [skillList, setSkillList] = useState<SkillObject[]>([defaultSkillItem]);
-  const [experienceList, setExperienceList] = useState<ExperienceObject[]>([
-    defaultExperienceItem,
-  ]);
-
   function handleAddSkill() {
-    setSkillList([...skillList, { ...defaultSkillItem }]);
+    pageContent.skillList.push(defaultSkillItem);
   }
 
   function handleRemoveSkill(indexToRemove: number) {
-    setSkillList([...skillList.filter((_, index) => index !== indexToRemove)]);
+    pageContent.skillList = pageContent.skillList.splice(indexToRemove, 1);
   }
 
   function handleUpdateSkill(updatedSkill: SkillObject, indexToUpdate: number) {
-    skillList[indexToUpdate] = updatedSkill;
-    setSkillList([...skillList]);
+    pageContent.skillList[indexToUpdate] = updatedSkill;
   }
 
   function handleAddExperience() {
-    setExperienceList([...experienceList, { ...defaultExperienceItem }]);
+    pageContent.experienceList.push(defaultExperienceItem);
   }
 
   function handleRemoveExperience(indexToRemove: number) {
-    setExperienceList([
-      ...experienceList.filter((_, index) => index !== indexToRemove),
-    ]);
+    pageContent.experienceList = pageContent.experienceList.splice(
+      indexToRemove,
+      1
+    );
   }
 
   function handleUpdateExperience(
     updatedExperience: ExperienceObject,
     indexToUpdate: number
   ) {
-    experienceList[indexToUpdate] = updatedExperience;
-    setExperienceList([...experienceList]);
+    pageContent.experienceList[indexToUpdate] = updatedExperience;
   }
 
   function handleOnClose() {
@@ -80,12 +77,15 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   return (
     <Modal show={show} scrollable size="lg">
       <Modal.Header closeButton onHide={() => handleOnClose()}>
-        Upload CV
+        Edit Page Content
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group className="pb-3 border-bottom">
-            <Form.Label>Upload your CV (.pdf)</Form.Label>
+            <Form.Label className="modal-subtitle">
+              Upload your CV (.pdf)
+            </Form.Label>
+            <Form.Text className="mb-2">Populate fields with your CV</Form.Text>
             <Form.Control
               type="file"
               accept=".pdf"
@@ -100,15 +100,13 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
             <Form.Control
               as="textarea"
               rows={3}
-              onChange={(e) => {
-                const input = e.target as HTMLInputElement;
-                setCVFile(input.files?.[0]);
-              }}
+              value={pageContent.summary}
+              onChange={(e) => (pageContent.summary = e.target.value)}
             />
           </Form.Group>
           <Form.Group className="pt-3 pb-3 border-bottom">
             <Form.Label className="mb-0 modal-subtitle">Skills</Form.Label>
-            {skillList.map((skillItem, index) => (
+            {pageContent?.skillList?.map((skillItem, index) => (
               <SkillItemForm
                 skillItem={skillItem}
                 index={index}
@@ -122,7 +120,7 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
           </Form.Group>
           <Form.Group className="pt-3">
             <Form.Label className="mb-0 modal-subtitle">Experience</Form.Label>
-            {experienceList.map((experienceItem, index) => (
+            {pageContent?.experienceList?.map((experienceItem, index) => (
               <ExperienceItemForm
                 experienceItem={experienceItem}
                 index={index}
