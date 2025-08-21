@@ -18,7 +18,7 @@ export const getStore = () => store;
 
 export type AppDispatch = typeof store.dispatch;
 
-export interface IThunkAPI {
+export interface ThunkAPI {
   dispatch: AppDispatch;
   state: RootState;
 }

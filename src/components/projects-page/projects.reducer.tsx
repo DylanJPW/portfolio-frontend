@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Project } from "./types";
 import axios from "axios";
-import { IThunkAPI } from "../../config/store";
+import { ThunkAPI } from "../../config/store";
 
 export interface ProjectsPageInitialState {
   loaded: boolean;
@@ -15,24 +15,24 @@ const initialState: ProjectsPageInitialState = {
 
 const requestURL = "api/projects";
 
-export const getProjects = createAsyncThunk<any, void, IThunkAPI>(
+export const getProjects = createAsyncThunk<any, void, ThunkAPI>(
   "projects/getProjects",
   async (_, { signal }) => axios.get(requestURL + "/getAllProjects", { signal })
 );
 
-export const addProject = createAsyncThunk<any, Project, IThunkAPI>(
+export const addProject = createAsyncThunk<any, Project, ThunkAPI>(
   "projects/addProject",
   async (project, { signal }) =>
     axios.post(requestURL + "/addProject", project, { signal })
 );
 
-export const deleteProject = createAsyncThunk<any, number, IThunkAPI>(
+export const deleteProject = createAsyncThunk<any, number, ThunkAPI>(
   "projects/deleteProjects",
   async (id, { signal }) =>
     axios.delete(requestURL + `/deleteProject/${id}`, { signal })
 );
 
-export const updateProject = createAsyncThunk<any, Project, IThunkAPI>(
+export const updateProject = createAsyncThunk<any, Project, ThunkAPI>(
   "projects/updateProject",
   async (project, { signal }) =>
     axios.put(requestURL + `/updateProject/${project.id}`, project, { signal })

@@ -1,6 +1,6 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../config/store";
-import { getLatestCV, uploadCV } from "../cv.reducer";
+import { getLatestCV, getParsedCV, saveCV, setPageContent } from "../edit-page.reducer";
 import { useState } from "react";
 import { CVObject, ExperienceObject, SkillObject, SkillType } from "../types";
 import { SkillItemForm } from "./SkillItemForm";
@@ -14,9 +14,9 @@ interface CVUploadModalProps {
 
 export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   const dispatch = useAppDispatch();
-  const { selectedCV } = useAppSelector((state) => state.cv);
+  const { parsedCV } = useAppSelector((state) => state.cv);
 
-  const pageContent: CVObject = structuredClone(selectedCV);
+  const pageContent: CVObject = structuredClone(parsedCV);
   const [cvFile, setCVFile] = useState<File | undefined>(undefined);
 
   const defaultSkillItem: SkillObject = {
@@ -29,7 +29,7 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   const defaultExperienceItem: ExperienceObject = {
     companyName: "",
     position: "",
-    startDate: (new Date().toISOString().split("T")[0]),
+    startDate: new Date().toISOString().split("T")[0],
     endDate: null,
     description: "",
   };
@@ -64,12 +64,16 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
     pageContent.experienceList[indexToUpdate] = updatedExperience;
   }
 
+  function handleUploadCV() {
+    dispatch(getParsedCV(cvFile as File));
+  }
+
   function handleOnClose() {
     setShow(false);
   }
 
   async function handleSubmit() {
-    await dispatch(uploadCV(cvFile as File));
+    await dispatch(saveCV(pageContent));
     dispatch(getLatestCV());
     handleOnClose();
   }
@@ -94,6 +98,9 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
                 setCVFile(input.files?.[0]);
               }}
             />
+            <div className="d-flex justify-content-end mt-2">
+              <Button onClick={() => handleUploadCV()}>Upload</Button>
+            </div>
           </Form.Group>
           <Form.Group className="pt-2 pb-3 border-bottom">
             <Form.Label className="modal-subtitle">Personal Summary</Form.Label>
