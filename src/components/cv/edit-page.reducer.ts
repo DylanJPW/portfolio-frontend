@@ -27,10 +27,10 @@ interface PageContentInitialState {
 }
 
 const initialState: PageContentInitialState = {
-  parsedCVLoaded: false,
+  parsedCVLoaded: true,
   pageContentLoaded: false,
-  parsedCV: mockCV as CVObject,
-  pageContent: mockCV as CVObject,
+  parsedCV: {} as CVObject,
+  pageContent: {} as CVObject,
 };
 
 const requestURL = "api/cv";
@@ -106,11 +106,11 @@ export const CVSlice = createSlice({
         switch (action.type) {
           case 'editPage/getLatestCV/rejected':
             state.pageContentLoaded = true;
-            state.pageContent = {} as CVObject;
+            state.pageContent = mockCV as CVObject;
             break;
           case 'editPage/getParsedCV/rejected':
             state.parsedCVLoaded = true;
-            state.parsedCV = {} as CVObject
+            state.parsedCV = mockCV as CVObject
             break;
           default:
             // do nothing
