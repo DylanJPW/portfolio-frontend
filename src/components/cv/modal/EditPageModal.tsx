@@ -1,11 +1,26 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../config/store";
-import { getLatestCV, getParsedCV, saveCV, setPageContent } from "../edit-page.reducer";
-import { useState } from "react";
+import { getLatestCV, getParsedCV, saveCV } from "../edit-page.reducer";
+import { useEffect, useState } from "react";
 import { CVObject, ExperienceObject, SkillObject, SkillType } from "../types";
 import { SkillItemForm } from "./SkillItemForm";
 import { ExperienceItemForm } from "./ExperienceItemForm";
 import "./EditPageModal.scss";
+
+const defaultSkillItem: SkillObject = {
+  name: "",
+  description: "",
+  type: SkillType.HARD,
+  yearsExperience: 0,
+};
+
+const defaultExperienceItem: ExperienceObject = {
+  companyName: "",
+  position: "",
+  startDate: new Date().toISOString().split("T")[0],
+  endDate: null,
+  description: "",
+};
 
 interface CVUploadModalProps {
   show: boolean;
@@ -16,42 +31,29 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   const dispatch = useAppDispatch();
   const { parsedCV } = useAppSelector((state) => state.cv);
 
-  const pageContent: CVObject = structuredClone(parsedCV);
+  const [formContent, setFormContent] = useState<CVObject>(parsedCV);
   const [cvFile, setCVFile] = useState<File | undefined>(undefined);
 
-  const defaultSkillItem: SkillObject = {
-    name: "",
-    description: "",
-    type: SkillType.HARD,
-    yearsExperience: 0,
-  };
-
-  const defaultExperienceItem: ExperienceObject = {
-    companyName: "",
-    position: "",
-    startDate: new Date().toISOString().split("T")[0],
-    endDate: null,
-    description: "",
-  };
+  useEffect(() => setFormContent(parsedCV), [parsedCV]);
 
   function handleAddSkill() {
-    pageContent.skillList.push(defaultSkillItem);
+    formContent.skillList.push(defaultSkillItem);
   }
 
   function handleRemoveSkill(indexToRemove: number) {
-    pageContent.skillList = pageContent.skillList.splice(indexToRemove, 1);
+    formContent.skillList = formContent.skillList.splice(indexToRemove, 1);
   }
 
   function handleUpdateSkill(updatedSkill: SkillObject, indexToUpdate: number) {
-    pageContent.skillList[indexToUpdate] = updatedSkill;
+    formContent.skillList[indexToUpdate] = updatedSkill;
   }
 
   function handleAddExperience() {
-    pageContent.experienceList.push(defaultExperienceItem);
+    formContent.experienceList.push(defaultExperienceItem);
   }
 
   function handleRemoveExperience(indexToRemove: number) {
-    pageContent.experienceList = pageContent.experienceList.splice(
+    formContent.experienceList = formContent.experienceList.splice(
       indexToRemove,
       1
     );
@@ -61,7 +63,7 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
     updatedExperience: ExperienceObject,
     indexToUpdate: number
   ) {
-    pageContent.experienceList[indexToUpdate] = updatedExperience;
+    formContent.experienceList[indexToUpdate] = updatedExperience;
   }
 
   function handleUploadCV() {
@@ -73,7 +75,7 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   }
 
   async function handleSubmit() {
-    await dispatch(saveCV(pageContent));
+    await dispatch(saveCV(formContent));
     dispatch(getLatestCV());
     handleOnClose();
   }
@@ -107,13 +109,15 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
             <Form.Control
               as="textarea"
               rows={3}
-              value={pageContent.summary}
-              onChange={(e) => (pageContent.summary = e.target.value)}
+              value={formContent.summary}
+              onChange={(e) =>
+                setFormContent({ ...formContent, summary: e.target.value })
+              }
             />
           </Form.Group>
           <Form.Group className="pt-3 pb-3 border-bottom">
             <Form.Label className="mb-0 modal-subtitle">Skills</Form.Label>
-            {pageContent?.skillList?.map((skillItem, index) => (
+            {formContent?.skillList?.map((skillItem, index) => (
               <SkillItemForm
                 skillItem={skillItem}
                 index={index}
@@ -127,7 +131,7 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
           </Form.Group>
           <Form.Group className="pt-3">
             <Form.Label className="mb-0 modal-subtitle">Experience</Form.Label>
-            {pageContent?.experienceList?.map((experienceItem, index) => (
+            {formContent?.experienceList?.map((experienceItem, index) => (
               <ExperienceItemForm
                 experienceItem={experienceItem}
                 index={index}

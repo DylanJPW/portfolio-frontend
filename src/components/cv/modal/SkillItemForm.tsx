@@ -17,8 +17,6 @@ export const SkillItemForm = ({
 }: SkillItemFormProps) => {
   const { name, description, type, yearsExperience } = skillItem;
   const isTechSkill = useMemo<boolean>(() => type === SkillType.HARD, [type]);
-  
-  const updatedItem = skillItem;
 
   return (
     <Form.Group>
@@ -31,7 +29,7 @@ export const SkillItemForm = ({
           type="text"
           value={name}
           onChange={(e) => {
-            updatedItem.name = e.target.value;
+            const updatedItem = { ...skillItem, name: e.target.value };
             handleUpdateSkill(updatedItem, index);
           }}
         />
@@ -42,7 +40,7 @@ export const SkillItemForm = ({
           as="textarea"
           value={description}
           onChange={(e) => {
-            updatedItem.description = e.target.value;
+            const updatedItem = { ...skillItem, description: e.target.value };
             handleUpdateSkill(updatedItem, index);
           }}
         />
@@ -59,7 +57,7 @@ export const SkillItemForm = ({
               checked={isTechSkill}
               onChange={(e) => {
                 if (e.target.checked) {
-                  updatedItem.type = SkillType.HARD;
+                  const updatedItem = { ...skillItem, type: SkillType.HARD };
                   handleUpdateSkill(updatedItem, index);
                 }
               }}
@@ -72,15 +70,17 @@ export const SkillItemForm = ({
               checked={!isTechSkill}
               onChange={(e) => {
                 if (e.target.checked) {
-                  updatedItem.type = SkillType.SOFT;
+                  const updatedItem = { ...skillItem, type: SkillType.SOFT };
                   handleUpdateSkill(updatedItem, index);
                 }
               }}
             />
           </Form.Group>
         </Form.Group>
-        <Form.Group className="d-flex align-items-center" hidden={!isTechSkill} >
-          <Form.Label className="mb-0 pe-3" hidden={!isTechSkill}>Years of Experience:</Form.Label>
+        <Form.Group className="d-flex align-items-center" hidden={!isTechSkill}>
+          <Form.Label className="mb-0 pe-3" hidden={!isTechSkill}>
+            Years of Experience:
+          </Form.Label>
           <Form.Control
             hidden={!isTechSkill}
             className="w-auto"
@@ -88,7 +88,10 @@ export const SkillItemForm = ({
             size="sm"
             value={yearsExperience}
             onChange={(e) => {
-              updatedItem.yearsExperience = parseInt(e.target.value);
+              const updatedItem = {
+                ...skillItem,
+                yearsExperience: parseInt(e.target.value),
+              };
               handleUpdateSkill(updatedItem, index);
             }}
           />

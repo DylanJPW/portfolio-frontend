@@ -21,13 +21,9 @@ export const ExperienceItemForm = ({
   const { companyName, position, startDate, endDate, description } =
     experienceItem;
 
-
-  console.log("Test startDate:", typeof startDate);
-
-
-  const updatedItem = experienceItem;
-
-  const [isCurrentPosition, setIsCurrentPosition] = useState<boolean>(!endDate ? true : false);
+  const [isCurrentPosition, setIsCurrentPosition] = useState<boolean>(
+    !endDate ? true : false
+  );
 
   return (
     <Form.Group>
@@ -40,7 +36,10 @@ export const ExperienceItemForm = ({
           type="text"
           value={companyName}
           onChange={(e) => {
-            updatedItem.companyName = e.target.value;
+            const updatedItem = {
+              ...experienceItem,
+              companyName: e.target.value,
+            };
             handleUpdateExperience(updatedItem, index);
           }}
         ></Form.Control>
@@ -51,7 +50,7 @@ export const ExperienceItemForm = ({
           type="text"
           value={position}
           onChange={(e) => {
-            updatedItem.position = e.target.value;
+            const updatedItem = { ...experienceItem, position: e.target.value };
             handleUpdateExperience(updatedItem, index);
           }}
         ></Form.Control>
@@ -63,7 +62,10 @@ export const ExperienceItemForm = ({
           rows={3}
           value={description}
           onChange={(e) => {
-            updatedItem.description = e.target.value;
+            const updatedItem = {
+              ...experienceItem,
+              description: e.target.value,
+            };
             handleUpdateExperience(updatedItem, index);
           }}
         ></Form.Control>
@@ -76,7 +78,13 @@ export const ExperienceItemForm = ({
             type="date"
             value={startDate}
             onChange={(e) => {
-              updatedItem.startDate = new Date(e.target.value).toISOString().split("T")[0];
+              const updatedStartDate = new Date(e.target.value)
+                .toISOString()
+                .split("T")[0];
+              const updatedItem = {
+                ...experienceItem,
+                startDate: updatedStartDate,
+              };
               handleUpdateExperience(updatedItem, index);
             }}
           ></Form.Control>
@@ -88,7 +96,13 @@ export const ExperienceItemForm = ({
             type="date"
             value={endDate ?? ""}
             onChange={(e) => {
-              updatedItem.endDate = new Date(e.target.value).toISOString().split("T")[0];
+              const updatedEndDate = new Date(e.target.value)
+                .toISOString()
+                .split("T")[0];
+              const updatedItem = {
+                ...experienceItem,
+                endDate: updatedEndDate,
+              };
               handleUpdateExperience(updatedItem, index);
             }}
             disabled={isCurrentPosition}
