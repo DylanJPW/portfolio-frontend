@@ -2,12 +2,12 @@ import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import { SkillsAccordion } from "./SkillsAccordion";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../config/store";
-import { getLatestCV } from "../cv/cv.reducer";
+import { getLatestCV } from "../cv/edit-page.reducer";
 import { Spinner } from "react-bootstrap";
 
 export const AboutMePage = () => {
   const dispatch = useAppDispatch();
-  const { selectedCV: cv, loaded } = useAppSelector((state) => state.cv);
+  const { pageContent, pageContentLoaded } = useAppSelector((state) => state.cv);
 
   useEffect(() => {
     dispatch(getLatestCV());
@@ -18,7 +18,7 @@ export const AboutMePage = () => {
       id="about-me-section"
       className="container-fluid d-flex flex-column text-center align-items-center justify-content-center section--height"
     >
-      {!loaded ? (
+      {!pageContentLoaded ? (
         <div className="d-flex flex-row align-items-center">
           <Spinner />
           <span className="ps-2 loading--font-size">Loading...</span>
@@ -34,7 +34,7 @@ export const AboutMePage = () => {
           <div className="row">
             <div className="col d-flex flex-column border-end border-3 justify-content-center">
               <h2>About Me</h2>
-              <p className="px-5">{cv.summary.trim()}</p>
+              <p className="px-5">{pageContent.summary.trim()}</p>
             </div>
             <div className="col">
               <img
@@ -47,7 +47,7 @@ export const AboutMePage = () => {
             </div>
           </div>
           <div id="skills" className="row w-100 pt-4">
-            <SkillsAccordion cvData={cv} />
+            <SkillsAccordion cvData={pageContent} />
           </div>
         </>
       )}
