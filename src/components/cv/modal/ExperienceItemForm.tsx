@@ -1,4 +1,4 @@
-import { Button, CloseButton, Col, Form, Row } from "react-bootstrap";
+import { CloseButton, Form } from "react-bootstrap";
 import { ExperienceObject } from "../types";
 import { useState } from "react";
 
@@ -8,7 +8,7 @@ interface ExperienceItemFormProps {
   handleRemoveExperience: (indexToRemove: number) => void;
   handleUpdateExperience: (
     updatedExperience: ExperienceObject,
-    indexToUpdate: number
+    indexToUpdate: number,
   ) => void;
 }
 
@@ -22,7 +22,7 @@ export const ExperienceItemForm = ({
     experienceItem;
 
   const [isCurrentPosition, setIsCurrentPosition] = useState<boolean>(
-    !endDate ? true : false
+    !endDate ? true : false,
   );
 
   return (

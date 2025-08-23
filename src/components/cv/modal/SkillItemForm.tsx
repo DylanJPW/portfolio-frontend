@@ -1,4 +1,4 @@
-import { Form, Row, Col, Button, CloseButton } from "react-bootstrap";
+import { Form, CloseButton } from "react-bootstrap";
 import { SkillObject, SkillType } from "../types";
 import { useMemo } from "react";
 

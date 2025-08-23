@@ -7,7 +7,9 @@ import { Spinner } from "react-bootstrap";
 
 export const AboutMePage = () => {
   const dispatch = useAppDispatch();
-  const { pageContent, pageContentLoaded } = useAppSelector((state) => state.cv);
+  const { pageContent, pageContentLoaded } = useAppSelector(
+    (state) => state.cv,
+  );
 
   useEffect(() => {
     dispatch(getLatestCV());

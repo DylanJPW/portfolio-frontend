@@ -30,7 +30,7 @@ interface CVUploadModalProps {
 export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   const dispatch = useAppDispatch();
   const { parsedCV, pageContent, parsedCVLoaded } = useAppSelector(
-    (state) => state.cv
+    (state) => state.cv,
   );
 
   const [formContent, setFormContent] = useState<CVObject>(pageContent);
@@ -58,14 +58,14 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
 
   function handleRemoveSkill(indexToRemove: number) {
     const updatedList = formContent.skillList.filter(
-      (_, index) => index !== indexToRemove
+      (_, index) => index !== indexToRemove,
     );
     setFormContent({ ...formContent, skillList: updatedList });
   }
 
   function handleUpdateSkill(updatedSkill: SkillObject, indexToUpdate: number) {
     const updatedList = formContent.skillList.map((item, index) =>
-      index === indexToUpdate ? updatedSkill : item
+      index === indexToUpdate ? updatedSkill : item,
     );
     setFormContent({ ...formContent, skillList: updatedList });
   }
@@ -79,17 +79,17 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
 
   function handleRemoveExperience(indexToRemove: number) {
     const updatedList = formContent.experienceList.filter(
-      (_, index) => index !== indexToRemove
+      (_, index) => index !== indexToRemove,
     );
     setFormContent({ ...formContent, experienceList: updatedList });
   }
 
   function handleUpdateExperience(
     updatedExperience: ExperienceObject,
-    indexToUpdate: number
+    indexToUpdate: number,
   ) {
     const updatedList = formContent.experienceList.map((item, index) =>
-      index === indexToUpdate ? updatedExperience : item
+      index === indexToUpdate ? updatedExperience : item,
     );
     setFormContent({ ...formContent, experienceList: updatedList });
   }

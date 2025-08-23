@@ -37,7 +37,7 @@ export const AddProjectModal = ({
 
   const title = useMemo<string>(
     () => (project?.id ? `Edit Project ${project.name}` : "Add Project"),
-    [show]
+    [show],
   );
 
   return (
