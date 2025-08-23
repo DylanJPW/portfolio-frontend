@@ -45,23 +45,23 @@ export const getParsedCV = createAsyncThunk<any, File, ThunkAPI>(
       signal,
       headers: { "Content-Type": "multipart/form-data" },
     });
-  }
+  },
 );
 
 export const saveCV = createAsyncThunk<any, CVObject, ThunkAPI>(
   "editPage/saveCV",
-  async (cv, { signal }) => axios.post(requestURL + "/saveCV", cv, { signal })
+  async (cv, { signal }) => axios.post(requestURL + "/saveCV", cv, { signal }),
 );
 
 export const getCVById = createAsyncThunk<any, number, ThunkAPI>(
   "editPage/getCVById",
   async (cvId, { signal }) =>
-    axios.get(requestURL + `/getCV/${cvId}`, { signal })
+    axios.get(requestURL + `/getCV/${cvId}`, { signal }),
 );
 
 export const getLatestCV = createAsyncThunk<any, void, ThunkAPI>(
   "editPage/getLatestCV",
-  async (_, { signal }) => axios.get(requestURL + `/getLatestCV`, { signal })
+  async (_, { signal }) => axios.get(requestURL + `/getLatestCV`, { signal }),
 );
 
 export const CVSlice = createSlice({
@@ -74,46 +74,52 @@ export const CVSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(isPending(getCVById, getLatestCV, getParsedCV), (state, action) => {
-        switch (action.type) {
-          case 'editPage/getLatestCV/pending':
-            state.pageContentLoaded = false;
-            state.pageContent = {} as CVObject;
-            break;
-          case 'editPage/getParsedCV/pending':
-            state.parsedCVLoaded = false;
-            state.parsedCV = {} as CVObject
-            break;
-          default:
+      .addMatcher(
+        isPending(getCVById, getLatestCV, getParsedCV),
+        (state, action) => {
+          switch (action.type) {
+            case "editPage/getLatestCV/pending":
+              state.pageContentLoaded = false;
+              state.pageContent = {} as CVObject;
+              break;
+            case "editPage/getParsedCV/pending":
+              state.parsedCVLoaded = false;
+              state.parsedCV = {} as CVObject;
+              break;
+            default:
             // do nothing
-        }
-      })
-      .addMatcher(isFulfilled(getCVById, getLatestCV, getParsedCV), (state, action) => {
-        switch (action?.type) {
-          case 'editPage/getLatestCV/fulfilled':
-            state.pageContentLoaded = true;
-            state.pageContent = action.payload?.data;
-            break;
-          case 'editPage/getParsedCV/fulfilled':
-            state.parsedCVLoaded = true;
-            state.parsedCV = action.payload?.data
-            break;
-          default:
+          }
+        },
+      )
+      .addMatcher(
+        isFulfilled(getCVById, getLatestCV, getParsedCV),
+        (state, action) => {
+          switch (action?.type) {
+            case "editPage/getLatestCV/fulfilled":
+              state.pageContentLoaded = true;
+              state.pageContent = action.payload?.data;
+              break;
+            case "editPage/getParsedCV/fulfilled":
+              state.parsedCVLoaded = true;
+              state.parsedCV = action.payload?.data;
+              break;
+            default:
             // do nothing
-        }
-      })
+          }
+        },
+      )
       .addMatcher(isRejected(getCVById, getLatestCV), (state, action) => {
         switch (action.type) {
-          case 'editPage/getLatestCV/rejected':
+          case "editPage/getLatestCV/rejected":
             state.pageContentLoaded = true;
             state.pageContent = mockCV as CVObject;
             break;
-          case 'editPage/getParsedCV/rejected':
+          case "editPage/getParsedCV/rejected":
             state.parsedCVLoaded = true;
-            state.parsedCV = mockCV as CVObject
+            state.parsedCV = mockCV as CVObject;
             break;
           default:
-            // do nothing
+          // do nothing
         }
       });
   },

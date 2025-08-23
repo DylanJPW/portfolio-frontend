@@ -17,25 +17,26 @@ const requestURL = "api/projects";
 
 export const getProjects = createAsyncThunk<any, void, ThunkAPI>(
   "projects/getProjects",
-  async (_, { signal }) => axios.get(requestURL + "/getAllProjects", { signal })
+  async (_, { signal }) =>
+    axios.get(requestURL + "/getAllProjects", { signal }),
 );
 
 export const addProject = createAsyncThunk<any, Project, ThunkAPI>(
   "projects/addProject",
   async (project, { signal }) =>
-    axios.post(requestURL + "/addProject", project, { signal })
+    axios.post(requestURL + "/addProject", project, { signal }),
 );
 
 export const deleteProject = createAsyncThunk<any, number, ThunkAPI>(
   "projects/deleteProjects",
   async (id, { signal }) =>
-    axios.delete(requestURL + `/deleteProject/${id}`, { signal })
+    axios.delete(requestURL + `/deleteProject/${id}`, { signal }),
 );
 
 export const updateProject = createAsyncThunk<any, Project, ThunkAPI>(
   "projects/updateProject",
   async (project, { signal }) =>
-    axios.put(requestURL + `/updateProject/${project.id}`, project, { signal })
+    axios.put(requestURL + `/updateProject/${project.id}`, project, { signal }),
 );
 
 export const ProjectsSlice = createSlice({

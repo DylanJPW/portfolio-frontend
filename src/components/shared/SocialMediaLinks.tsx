@@ -1,4 +1,4 @@
-import { EMAIL_LINK, GITHUB_URL, LINKEDIN_URL } from "../../constants"
+import { EMAIL_LINK, GITHUB_URL, LINKEDIN_URL } from "../../constants";
 
 export const SocialMediaLinks = () => {
   return (
@@ -13,5 +13,5 @@ export const SocialMediaLinks = () => {
         <i className="bi bi-github fs-2 text-body"></i>
       </a>
     </>
-  )
-}
+  );
+};

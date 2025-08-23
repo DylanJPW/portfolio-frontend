@@ -22,6 +22,6 @@ export interface SkillObject {
 }
 
 export enum SkillType {
-  SOFT = 'SOFT',
-  HARD = 'HARD',
+  SOFT = "SOFT",
+  HARD = "HARD",
 }
