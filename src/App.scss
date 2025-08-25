@@ -1,7 +1,17 @@
 @import "~bootstrap/scss/bootstrap";
 
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .router {
-  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
 }
 
 .card {
@@ -17,6 +27,6 @@
   font-weight: 600;
 }
 
-.profile-picture--border-radius {
+.border-radius-50 {
   border-radius: 50%;
 }

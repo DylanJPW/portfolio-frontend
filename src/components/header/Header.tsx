@@ -13,7 +13,7 @@ export const Header = () => {
 
   return (
     <>
-      <Navbar className="header z-1 bg-body-secondary w-100 position-fixed top-0 px-3 ">
+      <Navbar className="header bg-body-secondary w-100 px-3 ">
         <Navbar.Brand href="/">My Portfolio</Navbar.Brand>
         <Navbar.Collapse className="justify-content-between">
           <Nav className="align-items-center">
@@ -27,9 +27,9 @@ export const Header = () => {
               <i className="bi bi-upload fs-5 text-secondary ps-2" />
             </Nav.Link>
           </Nav>
-          <Navbar.Text>
+          <div>
             <SocialMediaLinks />
-          </Navbar.Text>
+          </div>
         </Navbar.Collapse>
       </Navbar>
       <CVUploadModal show={show} setShow={setShow} />
