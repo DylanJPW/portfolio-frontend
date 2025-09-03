@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../config/store";
 import { getLatestCV } from "../cv/edit-page.reducer";
 import { Spinner } from "react-bootstrap";
 import { SkillsAndExpSection } from "./SkillsAndExpSection";
+import './AboutMePage.scss';
 
 export const AboutMePage = () => {
   const dispatch = useAppDispatch();
@@ -15,10 +16,14 @@ export const AboutMePage = () => {
     dispatch(getLatestCV());
   }, []);
 
+  function handleScrollButton() {
+    document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <div
       id="about-me-section"
-      className="d-flex flex-row text-center align-items-center justify-content-center h-100"
+      className="d-flex flex-column text-center align-items-center h-100"
     >
       {!pageContentLoaded ? (
         <div className="d-flex flex-row align-items-center">
@@ -29,13 +34,18 @@ export const AboutMePage = () => {
         <>
           <div
             id="bio"
-            className="d-flex flex-column w-50 h-100 justify-content-center bg-light"
+            className="d-flex flex-row w-100 h-100 justify-content-center bg-light"
           >
-            <div>
-              <h1>Full Stack Developer</h1>
-              <p>With a focus on frontend development in React</p>
+            <div className="d-flex flex-column w-50 screen-height justify-content-center ">
+              <div>
+                <h1>Full Stack Developer</h1>
+                <p>With a focus on frontend development in React</p>
+              </div>
+              <div>
+                <p className="px-5">{pageContent.summary.trim()}</p>
+              </div>
             </div>
-            <div className="mb-3">
+            <div className="d-flex flex-column w-50 h-100 align-items-center justify-content-center">
               <img
                 src="./profilePicture.png"
                 className="img-thumbnail w-50 bg-light border-radius-50"
@@ -44,12 +54,14 @@ export const AboutMePage = () => {
                 <SocialMediaLinks />
               </div>
             </div>
-            <div>
-              <h2>About Me</h2>
-              <p className="px-5">{pageContent.summary.trim()}</p>
-            </div>
           </div>
-          <div id="skills" className="w-50 h-100 border-start">
+          <button
+            className="btn btn-primary scroll-button justify-content-center align-items-center align-self-center mb-4 position-fixed"
+            onClick={() => handleScrollButton()}
+          >
+            <i className="bi bi-chevron-down"></i>
+          </button>
+          <div id="skills" className="w-100 h-100 border-start">
             <SkillsAndExpSection cvData={pageContent} />
           </div>
         </>

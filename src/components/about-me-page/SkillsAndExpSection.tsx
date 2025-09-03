@@ -127,7 +127,7 @@ export const SkillsAndExpSection = ({ cvData }: SkillsAndExpSectionProps) => {
         {hasExperience && <ExperienceSection experienceList={experienceList} />}
       </div>
       <button
-        className="btn btn-primary scroll-button justify-content-center align-items-center align-self-center mb-4 position-fixed"
+        className="btn btn-primary scroll-button justify-content-center align-items-center align-self-center mb-4"
         onClick={() => handleScrollButton()}
       >
         <i className="bi bi-chevron-down"></i>
