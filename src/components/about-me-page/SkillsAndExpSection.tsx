@@ -6,6 +6,7 @@ import {
 } from "../cv/types";
 import { useMemo } from "react";
 import "./SkillsAndExpSection.scss";
+import { SectionScrollButton } from "../shared/SectionScrollButton";
 
 interface ExperienceItemProps {
   experienceItem: ExperienceObject;
@@ -41,10 +42,6 @@ function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
   );
 
   return [techSkills, softSkills];
-}
-
-function handleScrollButton() {
-  document.getElementById("experience-section")?.scrollIntoView({behavior: "smooth"});
 }
 
 interface SkillsSectionProps {
@@ -119,19 +116,14 @@ export const SkillsAndExpSection = ({ cvData }: SkillsAndExpSectionProps) => {
     <div className="h-100">
       <div
         id="skill-and-exp-section"
-        className="h-100 overflow-x-hidden overflow-y-auto px-3"
+        className="overflow-x-hidden overflow-y-auto px-3 screen-height position-relative"
       >
         {hasSkills && (
           <SkillsSection techSkills={techSkills} softSkills={softSkills} />
         )}
         {hasExperience && <ExperienceSection experienceList={experienceList} />}
+      <SectionScrollButton buttonText="Experience" sectionId="experience-section" />
       </div>
-      <button
-        className="btn btn-primary scroll-button justify-content-center align-items-center align-self-center mb-4"
-        onClick={() => handleScrollButton()}
-      >
-        <i className="bi bi-chevron-down"></i>
-      </button>
     </div>
   );
 };

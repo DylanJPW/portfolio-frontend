@@ -5,6 +5,7 @@ import { getLatestCV } from "../cv/edit-page.reducer";
 import { Spinner } from "react-bootstrap";
 import { SkillsAndExpSection } from "./SkillsAndExpSection";
 import './AboutMePage.scss';
+import { SectionScrollButton } from "../shared/SectionScrollButton";
 
 export const AboutMePage = () => {
   const dispatch = useAppDispatch();
@@ -16,14 +17,12 @@ export const AboutMePage = () => {
     dispatch(getLatestCV());
   }, []);
 
-  function handleScrollButton() {
-    document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
-  }
+
 
   return (
     <div
       id="about-me-section"
-      className="d-flex flex-column text-center align-items-center h-100"
+      className="d-flex flex-column text-center align-items-center h-100 position-relative"
     >
       {!pageContentLoaded ? (
         <div className="d-flex flex-row align-items-center">
@@ -55,12 +54,7 @@ export const AboutMePage = () => {
               </div>
             </div>
           </div>
-          <button
-            className="btn btn-primary scroll-button justify-content-center align-items-center align-self-center mb-4 position-fixed"
-            onClick={() => handleScrollButton()}
-          >
-            <i className="bi bi-chevron-down"></i>
-          </button>
+          <SectionScrollButton buttonText="Skills" sectionId="skills" />
           <div id="skills" className="w-100 h-100 border-start">
             <SkillsAndExpSection cvData={pageContent} />
           </div>
