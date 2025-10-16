@@ -1,7 +1,6 @@
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
-import { SectionScrollButtonGroup } from "../shared/SectionScrollButton";
+import { SectionScrollButtonGroup } from "../shared/SectionScrollButtonGroup";
 import { CVObject } from "../cv/types";
-import "./AboutMeSection.scss";
 import { Section } from "../shared/Section";
 
 interface AboutMeSectionProps {

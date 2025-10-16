@@ -1,4 +1,4 @@
-import "./SectionScrollButton.scss";
+import "./SectionScrollButtonGroup.scss";
 
 interface SectionScrollButtonProps {
   buttonText: string;

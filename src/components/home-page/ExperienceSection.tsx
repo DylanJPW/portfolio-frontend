@@ -1,6 +1,6 @@
 import { ExperienceObject } from "../cv/types";
 import { Section } from "../shared/Section";
-import { SectionScrollButtonGroup } from "../shared/SectionScrollButton";
+import { SectionScrollButtonGroup } from "../shared/SectionScrollButtonGroup";
 
 interface ExperienceItemProps {
   experienceItem: ExperienceObject;

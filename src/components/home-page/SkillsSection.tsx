@@ -1,6 +1,6 @@
 import { SkillObject, SkillType } from "../cv/types";
 import { Section } from "../shared/Section";
-import { SectionScrollButtonGroup } from "../shared/SectionScrollButton";
+import { SectionScrollButtonGroup } from "../shared/SectionScrollButtonGroup";
 
 function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
   const techSkills = [] as SkillObject[];
