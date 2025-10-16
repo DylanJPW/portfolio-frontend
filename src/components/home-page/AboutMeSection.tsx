@@ -1,5 +1,5 @@
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
-import { SectionScrollButton } from "../shared/SectionScrollButton";
+import { SectionScrollButtonGroup } from "../shared/SectionScrollButton";
 import { CVObject } from "../cv/types";
 import "./AboutMeSection.scss";
 import { Section } from "../shared/Section";
@@ -31,10 +31,13 @@ export const AboutMePage = ({ pageContent }: AboutMeSectionProps) => {
           </div>
         </div>
       </div>
-      <SectionScrollButton
-        buttonText="Skills"
-        sectionId="skills-section"
-        direction="down"
+      <SectionScrollButtonGroup
+        buttons={[
+          {
+            buttonText: "Skills",
+            sectionId: "skills-section",
+          },
+        ]}
       />
     </Section>
   );

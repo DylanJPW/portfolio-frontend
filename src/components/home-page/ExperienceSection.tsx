@@ -1,6 +1,6 @@
 import { ExperienceObject } from "../cv/types";
 import { Section } from "../shared/Section";
-import { SectionScrollButton } from "../shared/SectionScrollButton";
+import { SectionScrollButtonGroup } from "../shared/SectionScrollButton";
 
 interface ExperienceItemProps {
   experienceItem: ExperienceObject;
@@ -42,10 +42,14 @@ export const ExperienceSection = ({
           ))}
         </div>
       </div>
-      <SectionScrollButton
-        buttonText="Skills"
-        sectionId="skills-section"
-        direction="up"
+      <SectionScrollButtonGroup
+        buttons={[
+          {
+            buttonText: "Skills",
+            sectionId: "skills-section",
+            isUpButton: true,
+          },
+        ]}
       />
     </Section>
   );

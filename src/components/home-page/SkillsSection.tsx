@@ -1,6 +1,6 @@
 import { SkillObject, SkillType } from "../cv/types";
 import { Section } from "../shared/Section";
-import { SectionScrollButton } from "../shared/SectionScrollButton";
+import { SectionScrollButtonGroup } from "../shared/SectionScrollButton";
 
 function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
   const techSkills = [] as SkillObject[];
@@ -42,18 +42,19 @@ export const SkillsSection = ({ skillList }: SkillsSectionProps) => {
           })}
         </div>
       </div>
-      <div className="d-flex flex-row">
-        <SectionScrollButton
-          buttonText="Experience"
-          sectionId="experience-section"
-          direction="down"
-        />
-        <SectionScrollButton
-          buttonText="About Me"
-          sectionId="about-me-section"
-          direction="up"
-        />
-      </div>
+      <SectionScrollButtonGroup
+        buttons={[
+          {
+            buttonText: "Experience",
+            sectionId: "experience-section",
+          },
+          {
+            buttonText: "About Me",
+            sectionId: "about-me-section",
+            isUpButton: true,
+          },
+        ]}
+      />
     </Section>
   );
 };
