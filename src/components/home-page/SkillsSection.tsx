@@ -45,13 +45,13 @@ export const SkillsSection = ({ skillList }: SkillsSectionProps) => {
       <SectionScrollButtonGroup
         buttons={[
           {
-            buttonText: "Experience",
-            sectionId: "experience-section",
-          },
-          {
             buttonText: "About Me",
             sectionId: "about-me-section",
             isUpButton: true,
+          },
+          {
+            buttonText: "Experience",
+            sectionId: "experience-section",
           },
         ]}
       />
