@@ -3,7 +3,7 @@ import {
   SectionScrollButtonGroup,
   SectionScrollButtonProps,
 } from "./SectionScrollButtonGroup";
-import { useSections } from "./SectionContext";
+import { useSectionContext } from "./SectionContext";
 
 export interface SectionProps {
   id: string;
@@ -13,7 +13,7 @@ export interface SectionProps {
 
 export const Section = (props: SectionProps) => {
   const { id, title, children } = props;
-  const { sections, registerSection } = useSections();
+  const { sections, registerSection } = useSectionContext();
 
   useEffect(() => {
     registerSection({ id, title });
@@ -21,7 +21,7 @@ export const Section = (props: SectionProps) => {
 
   const index = sections.findIndex((s) => s.id === id);
   const prevSection = index > 0 ? sections[index - 1] : null;
-  const nextSection = index < sections.length - 1 ? sections[index + 1] : null
+  const nextSection = index < sections.length - 1 ? sections[index + 1] : null;
 
   const buttons: SectionScrollButtonProps[] = [
     ...(prevSection

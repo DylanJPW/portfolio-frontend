@@ -2,7 +2,27 @@ import { useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import { CVUploadModal } from "../cv/modal/EditPageModal";
+import { useSectionContext } from "../shared/SectionContext";
 import "./Header.scss";
+
+const SectionLinks = () => {
+  const { sections, activeSectionId, setActiveSectionId } = useSectionContext();
+
+  return (
+    <>
+      {sections.map((section) => (
+        <Nav.Link
+          key={section.id}
+          active={section.id === activeSectionId}
+          href={`/#${section.id}`}
+          onClick={() => setActiveSectionId(section.id)}
+        >
+          {section.title}
+        </Nav.Link>
+      ))}
+    </>
+  );
+};
 
 export const Header = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -17,8 +37,7 @@ export const Header = () => {
         <Navbar.Brand href="/">My Portfolio</Navbar.Brand>
         <Navbar.Collapse className="justify-content-between">
           <Nav className="align-items-center">
-            <Nav.Link href="/#home">Home</Nav.Link>
-            <Nav.Link href="/#projects-section">Projects</Nav.Link>
+            <SectionLinks />
             <Nav.Link
               className="d-flex align-items-center"
               onClick={() => handleUploadCVOnClick()}

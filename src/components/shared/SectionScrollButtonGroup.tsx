@@ -1,3 +1,4 @@
+import { useSectionContext } from "./SectionContext";
 import "./SectionScrollButtonGroup.scss";
 
 export interface SectionScrollButtonProps {
@@ -11,8 +12,11 @@ const SectionScrollButton = ({
   sectionId,
   isUpButton = false,
 }: SectionScrollButtonProps) => {
+  const { setActiveSectionId } = useSectionContext();
+
   function handleScrollButton() {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    setActiveSectionId(sectionId);
   }
 
   const direction = isUpButton ? "up" : "down";
