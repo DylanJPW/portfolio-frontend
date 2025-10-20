@@ -1,6 +1,6 @@
 import "./SectionScrollButtonGroup.scss";
 
-interface SectionScrollButtonProps {
+export interface SectionScrollButtonProps {
   buttonText: string;
   sectionId: string;
   isUpButton?: boolean;
