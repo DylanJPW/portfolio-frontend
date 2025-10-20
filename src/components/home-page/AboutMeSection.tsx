@@ -1,5 +1,4 @@
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
-import { SectionScrollButtonGroup } from "../shared/SectionScrollButtonGroup";
 import { CVObject } from "../cv/types";
 import { Section } from "../shared/Section";
 
@@ -9,7 +8,7 @@ interface AboutMeSectionProps {
 
 export const AboutMePage = ({ pageContent }: AboutMeSectionProps) => {
   return (
-    <Section id="about-me-section">
+    <Section id="about-me-section" title="About Me">
       <div className="d-flex flex-row w-100 justify-content-center bg-light screen-height">
         <div className="d-flex flex-column w-50 justify-content-center ">
           <div>
@@ -30,14 +29,6 @@ export const AboutMePage = ({ pageContent }: AboutMeSectionProps) => {
           </div>
         </div>
       </div>
-      <SectionScrollButtonGroup
-        buttons={[
-          {
-            buttonText: "Skills",
-            sectionId: "skills-section",
-          },
-        ]}
-      />
     </Section>
   );
 };

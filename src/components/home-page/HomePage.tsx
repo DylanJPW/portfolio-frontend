@@ -6,6 +6,7 @@ import { ExperienceSection } from "./ExperienceSection";
 import { SkillsSection } from "./SkillsSection";
 import { getLatestCV } from "../cv/edit-page.reducer";
 import "./HomePage.scss";
+import { SectionProvider } from "../shared/SectionContext";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -27,10 +28,12 @@ export const HomePage = () => {
   }
 
   return (
-    <div id="home" className="d-flex flex-column w-100">
-      <AboutMePage pageContent={pageContent} />
-      <SkillsSection skillList={pageContent.skillList} />
-      <ExperienceSection experienceList={pageContent.experienceList} />
-    </div>
+    <SectionProvider>
+      <div id="home" className="d-flex flex-column w-100">
+        <AboutMePage pageContent={pageContent} />
+        <SkillsSection skillList={pageContent.skillList} />
+        <ExperienceSection experienceList={pageContent.experienceList} />
+      </div>
+    </SectionProvider>
   );
 };
