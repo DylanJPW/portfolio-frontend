@@ -20,7 +20,6 @@ export const Section = (props: SectionProps) => {
   }, [id, title, registerSection]);
 
   const index = sections.findIndex((s) => s.id === id);
-  console.log("Test sections:", sections, index, title);
   const prevSection = index > 0 ? sections[index - 1] : null;
   const nextSection = index < sections.length - 1 ? sections[index + 1] : null
 
