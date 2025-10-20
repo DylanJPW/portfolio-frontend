@@ -7,6 +7,7 @@ import { SkillsSection } from "./SkillsSection";
 import { getLatestCV } from "../cv/edit-page.reducer";
 import "./HomePage.scss";
 import { SectionProvider } from "../shared/SectionContext";
+import { ProjectsSection } from "../projects-page/ProjectsSection";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ export const HomePage = () => {
         <AboutMePage pageContent={pageContent} />
         <SkillsSection skillList={pageContent.skillList} />
         <ExperienceSection experienceList={pageContent.experienceList} />
+        <ProjectsSection />
       </div>
     </SectionProvider>
   );
