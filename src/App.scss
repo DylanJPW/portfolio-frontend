@@ -9,7 +9,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
+  scroll-behavior: smooth;
+  }
 
 .router {
   display: flex;
@@ -37,4 +38,8 @@
 
 .screen-height {
   height: calc(100vh - var(--navbar-height));
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
 }
