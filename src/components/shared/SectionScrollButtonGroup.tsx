@@ -17,6 +17,7 @@ const SectionScrollButton = ({
   function handleScrollButton() {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
     setActiveSectionId(sectionId);
+    window.history.pushState(null, "", `#${sectionId}`); // Updates the URL with sectionId on navigation
   }
 
   const direction = isUpButton ? "up" : "down";
