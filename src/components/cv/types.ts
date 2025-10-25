@@ -1,3 +1,5 @@
+import { ImageObject } from "../../types";
+
 export interface CVObject {
   id: number;
   summary: string;
@@ -12,6 +14,7 @@ export interface ExperienceObject {
   startDate: string;
   endDate: string | null;
   description: string;
+  image?: ImageObject;
 }
 
 export interface SkillObject {
@@ -19,6 +22,7 @@ export interface SkillObject {
   type: SkillType;
   yearsExperience: number;
   description: string;
+  image?: ImageObject;
 }
 
 export enum SkillType {

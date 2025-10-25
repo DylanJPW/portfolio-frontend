@@ -1,13 +1,10 @@
-export interface ProjectImage {
-  imageUrl?: string;
-  altText?: string;
-}
+import { ImageObject } from "../../types";
 
 export interface Project {
   id: number;
   name: string;
   description: string;
-  image?: ProjectImage;
+  image?: ImageObject;
   repoLink?: string;
   tags?: string[];
 }
