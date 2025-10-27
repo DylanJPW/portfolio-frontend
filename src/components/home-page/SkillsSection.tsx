@@ -23,7 +23,7 @@ export const SkillsSection = ({ skillList }: SkillsSectionProps) => {
 
   return (
     <Section id="skills-section" title="Skills">
-      <div className="flex-grow-1 d-flex flex-column justify-content-center w-100 screen-height">
+      <div className="flex-grow-1 d-flex flex-column justify-content-center screen-height screen-width px-3">
         <h2>Skills</h2>
         <div className="row">
           {[techSkills, softSkills].map((list, index) => {

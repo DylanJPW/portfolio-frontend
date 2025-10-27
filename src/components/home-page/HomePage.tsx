@@ -28,7 +28,7 @@ export const HomePage = () => {
   }
 
   return (
-    <div id="home" className="d-flex flex-column w-100 smooth-scroll">
+    <div id="home" className="d-flex flex-row w-100 smooth-scroll">
       <AboutMePage pageContent={pageContent} />
       <SkillsSection skillList={pageContent.skillList} />
       <ExperienceSection experienceList={pageContent.experienceList} />

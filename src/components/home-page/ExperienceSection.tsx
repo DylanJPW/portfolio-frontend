@@ -56,7 +56,7 @@ export const ExperienceSection = ({
 }: ExperienceSectionProps) => {
   return (
     <Section id="experience-section" title="Experience">
-      <div className="flex-grow-1 d-flex flex-column justify-content-center w-100 screen-height">
+      <div className="flex-grow-1 d-flex flex-column justify-content-center screen-height screen-width px-3">
         <h2>Experience & Education</h2>
         <div className="row justify-content-center">
           {experienceList.map((experience) => (

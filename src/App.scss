@@ -40,6 +40,10 @@
   height: calc(100vh - var(--navbar-height));
 }
 
+.screen-width {
+  width: 100vw;
+}
+
 .smooth-scroll {
   scroll-behavior: smooth;
 }

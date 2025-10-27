@@ -9,7 +9,7 @@ interface AboutMeSectionProps {
 export const AboutMePage = ({ pageContent }: AboutMeSectionProps) => {
   return (
     <Section id="about-me-section" title="About Me">
-      <div className="d-flex flex-row w-100 justify-content-center bg-light screen-height">
+      <div className="d-flex flex-row justify-content-center bg-light screen-height screen-width">
         <div className="d-flex flex-column w-50 justify-content-center ">
           <div>
             <h1>Full Stack Developer</h1>

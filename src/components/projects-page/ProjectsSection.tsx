@@ -45,7 +45,7 @@ export const ProjectsSection = ({
 
   return (
     <Section id="projects-section" title="Projects">
-      <div className="container-fluid d-flex flex-column text-center align-items-center justify-content-center bg-light screen-height">
+      <div className="container-fluid d-flex flex-column text-center align-items-center justify-content-center bg-light screen-height screen-width px-3">
         <h1>Projects</h1>
         <p>This is the projects page content.</p>
         {!isOverview && (
