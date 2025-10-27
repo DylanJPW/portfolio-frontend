@@ -58,7 +58,7 @@ export const ExperienceSection = ({
     <Section id="experience-section" title="Experience">
       <div className="flex-grow-1 d-flex flex-column justify-content-center w-100 screen-height">
         <h2>Experience & Education</h2>
-        <div className="row">
+        <div className="row justify-content-center">
           {experienceList.map((experience) => (
             <ExperienceItem experienceItem={experience} />
           ))}
