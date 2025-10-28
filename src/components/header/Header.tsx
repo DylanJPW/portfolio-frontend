@@ -5,7 +5,7 @@ import { CVUploadModal } from "../cv/modal/EditPageModal";
 import { useSectionContext } from "../shared/SectionContext";
 import "./Header.scss";
 
-const SectionLinks = () => {
+export const SectionLinks = () => {
   const { sections, activeSectionId, setActiveSectionId } = useSectionContext();
 
   return (

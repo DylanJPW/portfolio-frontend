@@ -1,0 +1,27 @@
+.header-island {
+  position: absolute !important;
+  display: flex;
+  left: 50%;
+  transform: translate(-50%);
+  top: 100px;
+  z-index: 100;
+  background-color: var(--bs-dark);
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.header-island .section-link-container {
+  width: fit-content;
+
+  &.active,
+  &:hover {
+    background-color: var(--bs-secondary);
+  }
+}
+
+.header-island .section-link {
+  text-decoration: none;
+  color: var(--bs-light);
+  margin: 1rem;
+}

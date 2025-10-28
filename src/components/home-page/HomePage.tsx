@@ -5,8 +5,9 @@ import { AboutMePage } from "./AboutMeSection";
 import { ExperienceSection } from "./ExperienceSection";
 import { SkillsSection } from "./SkillsSection";
 import { getLatestCV } from "../cv/edit-page.reducer";
-import "./HomePage.scss";
 import { ProjectsSection } from "../projects-page/ProjectsSection";
+import { HeaderIsland } from "../header/HeaderIsland";
+import "./HomePage.scss";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ export const HomePage = () => {
 
   return (
     <div id="home" className="d-flex flex-row w-100 smooth-scroll">
+      <HeaderIsland />
       <AboutMePage pageContent={pageContent} />
       <SkillsSection skillList={pageContent.skillList} />
       <ExperienceSection experienceList={pageContent.experienceList} />
