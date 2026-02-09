@@ -5,13 +5,13 @@ import { AboutMePage } from "./AboutMeSection";
 import { ExperienceSection } from "./ExperienceSection";
 import { SkillsSection } from "./SkillsSection";
 import { getLatestCV } from "../cv/edit-page.reducer";
-import "./HomePage.scss";
 import { ProjectsSection } from "../projects-page/ProjectsSection";
+import "./HomePage.scss";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
   const { pageContent, pageContentLoaded } = useAppSelector(
-    (state) => state.cv
+    (state) => state.cv,
   );
 
   useEffect(() => {
@@ -28,7 +28,10 @@ export const HomePage = () => {
   }
 
   return (
-    <div id="home" className="d-flex flex-column w-100 smooth-scroll">
+    <div
+      id="home"
+      className="d-flex flex-column w-100 smooth-scroll overflow-y-scroll"
+    >
       <AboutMePage pageContent={pageContent} />
       <SkillsSection skillList={pageContent.skillList} />
       <ExperienceSection experienceList={pageContent.experienceList} />
