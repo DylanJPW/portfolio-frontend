@@ -29,7 +29,7 @@ export const ProjectsSection = ({
     () =>
       projects.find((project) => project.id === selectedProjectId) ||
       ({} as Project),
-    [selectedProjectId]
+    [selectedProjectId],
   );
 
   useEffect(() => {

@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface SectionInfo {
   id: string;
@@ -29,12 +36,12 @@ export const SectionProvider = ({ children }: SectionProviderProps) => {
     ? window.location.hash.slice(1)
     : "about-me-section";
   const [activeSectionId, setActiveSectionId] = useState<string>(
-    initialActiveSectionId
+    initialActiveSectionId,
   );
 
   function registerSection(section: SectionInfo) {
     setSections((prev) =>
-      prev.find((s) => s.id === section.id) ? prev : [...prev, section]
+      prev.find((s) => s.id === section.id) ? prev : [...prev, section],
     );
   }
 

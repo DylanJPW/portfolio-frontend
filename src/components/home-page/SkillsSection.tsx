@@ -8,7 +8,7 @@ function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
   skills.forEach((skill) =>
     skill.type === SkillType.HARD
       ? techSkills.push(skill)
-      : softSkills.push(skill)
+      : softSkills.push(skill),
   );
 
   return [techSkills, softSkills];
