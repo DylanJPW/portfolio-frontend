@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { type ExperienceObject } from "../cv/types";
 import { Section } from "../shared/Section";
-import './ExperienceSection.scss';
+import "./ExperienceSection.scss";
 
 interface ExperienceItemProps {
   experienceItem: ExperienceObject;
@@ -16,7 +16,10 @@ const ExperienceItem = ({ experienceItem }: ExperienceItemProps) => {
 
   return (
     <div className="col-12 col-md-6 col-sm-12 mb-3">
-      <div className="card experience-card flex-row border-0 shadow-sm h-100 align-items-center" onClick={() => setExpanded(!expanded)}>
+      <div
+        className="card experience-card flex-row border-0 shadow-sm h-100 align-items-center"
+        onClick={() => setExpanded(!expanded)}
+      >
         <div>
           {image?.imageUrl && (
             <img
@@ -35,8 +38,9 @@ const ExperienceItem = ({ experienceItem }: ExperienceItemProps) => {
           <div className="experience-details">
             <p className="text-secondary small date-range">{dateRange}</p>
             <p
-              className={`card-text text-secondary small description ${expanded ? "expanded" : ""
-                }`}
+              className={`card-text text-secondary small description ${
+                expanded ? "expanded" : ""
+              }`}
             >
               {description}
             </p>
