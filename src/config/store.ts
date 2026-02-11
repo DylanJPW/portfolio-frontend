@@ -1,7 +1,11 @@
-import { AnyAction, configureStore, createAction } from "@reduxjs/toolkit";
+import { type AnyAction, configureStore, createAction } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import reducer from "../reducers";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import {
+  type TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+} from "react-redux";
 
 const combinedReducers = combineReducers(reducer);
 export type RootState = ReturnType<typeof combinedReducers>;

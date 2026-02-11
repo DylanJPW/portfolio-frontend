@@ -1,5 +1,5 @@
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
-import { CVObject } from "../cv/types";
+import { type CVObject } from "../cv/types";
 import { Section } from "../shared/Section";
 
 interface AboutMeSectionProps {
@@ -16,7 +16,7 @@ export const AboutMePage = ({ pageContent }: AboutMeSectionProps) => {
             <p>With a focus on frontend development in React</p>
           </div>
           <div>
-            <p className="px-5">{pageContent.summary.trim()}</p>
+            <p className="px-5">{pageContent.summary?.trim()}</p>
           </div>
         </div>
         <div className="d-flex flex-column w-50 h-100 align-items-center justify-content-center">

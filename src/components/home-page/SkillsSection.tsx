@@ -1,4 +1,4 @@
-import { SkillObject, SkillType } from "../cv/types";
+import { type SkillObject, SkillType } from "../cv/types";
 import { Section } from "../shared/Section";
 
 function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
@@ -8,7 +8,7 @@ function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {
   skills.forEach((skill) =>
     skill.type === SkillType.HARD
       ? techSkills.push(skill)
-      : softSkills.push(skill)
+      : softSkills.push(skill),
   );
 
   return [techSkills, softSkills];

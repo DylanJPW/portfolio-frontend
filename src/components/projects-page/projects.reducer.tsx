@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Project } from "./types";
+import { type Project } from "./types";
 import axios from "axios";
-import { ThunkAPI } from "../../config/store";
+import { type ThunkAPI } from "../../config/store";
 
 export interface ProjectsPageInitialState {
   loaded: boolean;

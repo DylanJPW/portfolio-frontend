@@ -1,5 +1,5 @@
 import { CloseButton, Form } from "react-bootstrap";
-import { ExperienceObject } from "../types";
+import { type ExperienceObject } from "../types";
 import { useState } from "react";
 
 interface ExperienceItemFormProps {

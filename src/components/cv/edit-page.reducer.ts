@@ -6,8 +6,8 @@ import {
   isRejected,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ThunkAPI } from "../../config/store";
-import { CVObject, SkillType } from "./types";
+import { type ThunkAPI } from "../../config/store";
+import { type CVObject, SkillType } from "./types";
 import mockCVData from "./mock-cv-info.json";
 
 const mockCV: CVObject = {
