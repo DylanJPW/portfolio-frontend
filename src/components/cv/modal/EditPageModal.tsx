@@ -2,7 +2,12 @@ import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../config/store";
 import { getLatestCV, getParsedCV, saveCV } from "../edit-page.reducer";
 import { useEffect, useRef, useState } from "react";
-import { CVObject, ExperienceObject, SkillObject, SkillType } from "../types";
+import {
+  type CVObject,
+  type ExperienceObject,
+  type SkillObject,
+  SkillType,
+} from "../types";
 import { SkillItemForm } from "./SkillItemForm";
 import { ExperienceItemForm } from "./ExperienceItemForm";
 import "./EditPageModal.scss";

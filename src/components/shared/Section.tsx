@@ -1,7 +1,7 @@
-import { ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import {
   SectionScrollButtonGroup,
-  SectionScrollButtonProps,
+  type SectionScrollButtonProps,
 } from "./SectionScrollButtonGroup";
 import { useSectionContext } from "./SectionContext";
 

@@ -1,4 +1,4 @@
-import { ImageObject } from "../../types";
+import type { ImageObject } from "../../types";
 
 export interface Project {
   id: number;

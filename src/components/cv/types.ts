@@ -1,4 +1,4 @@
-import { ImageObject } from "../../types";
+import { type ImageObject } from "../../types";
 
 export interface CVObject {
   id: number;
@@ -25,7 +25,9 @@ export interface SkillObject {
   image?: ImageObject;
 }
 
-export enum SkillType {
-  SOFT = "SOFT",
-  HARD = "HARD",
-}
+export const SkillType = {
+  SOFT: "SOFT",
+  HARD: "HARD",
+} as const;
+
+export type SkillType = (typeof SkillType)[keyof typeof SkillType];

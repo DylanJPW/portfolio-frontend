@@ -1,5 +1,5 @@
 import { Form, CloseButton } from "react-bootstrap";
-import { SkillObject, SkillType } from "../types";
+import { type SkillObject, SkillType } from "../types";
 import { useMemo } from "react";
 
 interface SkillItemFormProps {

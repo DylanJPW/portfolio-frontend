@@ -1,5 +1,5 @@
 import { Button, Form, Modal } from "react-bootstrap";
-import { Project } from "./types";
+import { type Project } from "./types";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "../../config/store";
 import { addProject, getProjects, updateProject } from "./projects.reducer";

@@ -1,4 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
+@use "bootstrap/scss/bootstrap";
 
 :root {
   --navbar-height: 0px;
@@ -10,7 +10,7 @@
   flex-direction: column;
   overflow: hidden;
   scroll-behavior: smooth;
-  }
+}
 
 .router {
   display: flex;
@@ -33,7 +33,7 @@
 }
 
 .border-radius-50 {
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 
 .screen-height {
