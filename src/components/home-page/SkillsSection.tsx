@@ -1,4 +1,4 @@
-import { SkillObject, SkillType } from "../cv/types";
+import { type SkillObject, SkillType } from "../cv/types";
 import { Section } from "../shared/Section";
 
 function splitSkills(skills: SkillObject[]): [SkillObject[], SkillObject[]] {

@@ -4,7 +4,7 @@ import { getProjects } from "./projects.reducer";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { Button } from "react-bootstrap";
 import { AddProjectModal } from "./AddProjectModal";
-import { Project } from "./types";
+import { type Project } from "./types";
 import { Section } from "../shared/Section";
 import "./ProjectsSection.scss";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExperienceObject } from "../cv/types";
+import { type ExperienceObject } from "../cv/types";
 import { Section } from "../shared/Section";
 import "./ExperienceSection.scss";
 

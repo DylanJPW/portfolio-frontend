@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.BASE_URL || "http://localhost:8080";
+axios.defaults.baseURL = import.meta.env.BASE_URL ?? "http://localhost:8080";
 
 const setupAxiosInterceptors = () => {};
 
