@@ -1,5 +1,5 @@
 import { ProjectCard } from "./ProjectCard";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { getProjects } from "./projects.reducer";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { Button } from "react-bootstrap";
@@ -7,6 +7,7 @@ import { AddProjectModal } from "./AddProjectModal";
 import { type Project } from "./types";
 import { Section } from "../shared/Section";
 import "./ProjectsSection.scss";
+import { AuthContext } from "../login/AuthContext";
 
 interface ProjectsPageProps {
   isOverview?: boolean;
@@ -24,6 +25,9 @@ export const ProjectsSection = ({
   const [selectedProjectId, setSelectedProjectId] = useState<
     number | undefined
   >(undefined);
+
+  const { isLoggedIn } = useContext(AuthContext);
+  const showAddProjectButton = !isOverview && isLoggedIn;
 
   const selectedProject = useMemo<Project>(
     () =>
@@ -48,7 +52,7 @@ export const ProjectsSection = ({
       <div className="container-fluid d-flex flex-column text-center align-items-center justify-content-center screen-height">
         <h1>Projects</h1>
         <p>This is the projects page content.</p>
-        {!isOverview && (
+        {showAddProjectButton && (
           <Button variant="primary" onClick={() => handleOnClickAdd()}>
             Add Project
           </Button>
