@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { SocialMediaLinks } from "../shared/SocialMediaLinks";
 import { CVUploadModal } from "../cv/modal/EditPageModal";
 import { useSectionContext } from "../shared/SectionContext";
+import { LoginModal } from "../login/LoginModal";
+import { AuthContext } from "../login/AuthContext";
 import "./Header.scss";
 
 const SectionLinks = () => {
@@ -24,11 +26,49 @@ const SectionLinks = () => {
   );
 };
 
+const LoginButton = ({
+  setShowLoginModal,
+}: {
+  setShowLoginModal: (value: boolean) => void;
+}) => {
+  return (
+    <div
+      className="d-flex align-items-center cursor-pointer"
+      onClick={() => setShowLoginModal(true)}
+    >
+      Admin Login
+    </div>
+  );
+};
+
+const LogoutButton = ({
+  setIsLoggedIn,
+  setToken,
+}: {
+  setIsLoggedIn: (value: boolean) => void;
+  setToken: (value: string | null) => void;
+}) => {
+  return (
+    <div
+      className="d-flex align-items-center cursor-pointer"
+      onClick={() => {
+        setIsLoggedIn(false);
+        setToken(null);
+      }}
+    >
+      Logout
+    </div>
+  );
+};
+
 export const Header = () => {
-  const [show, setShow] = useState<boolean>(false);
+  const { isLoggedIn, setIsLoggedIn, setToken } = useContext(AuthContext);
+
+  const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
+  const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
   function handleUploadCVOnClick() {
-    setShow(true);
+    setShowUploadModal(true);
   }
 
   return (
@@ -38,20 +78,28 @@ export const Header = () => {
         <Navbar.Collapse className="justify-content-between">
           <Nav className="align-items-center">
             <SectionLinks />
-            <Nav.Link
-              className="d-flex align-items-center"
-              onClick={() => handleUploadCVOnClick()}
-            >
-              Upload CV
-              <i className="bi bi-upload fs-5 text-secondary ps-2" />
-            </Nav.Link>
+            {isLoggedIn && (
+              <Nav.Link
+                className="d-flex align-items-center"
+                onClick={() => handleUploadCVOnClick()}
+              >
+                Upload CV
+                <i className="bi bi-upload fs-5 text-secondary ps-2" />
+              </Nav.Link>
+            )}
           </Nav>
-          <div>
+          <div className="flex flex-row gap-3">
+            {isLoggedIn ? (
+              <LogoutButton setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
+            ) : (
+              <LoginButton setShowLoginModal={setShowLoginModal} />
+            )}
             <SocialMediaLinks />
           </div>
         </Navbar.Collapse>
       </Navbar>
-      <CVUploadModal show={show} setShow={setShow} />
+      <CVUploadModal show={showUploadModal} setShow={setShowUploadModal} />
+      <LoginModal showModal={showLoginModal} setShowModal={setShowLoginModal} />
     </>
   );
 };
