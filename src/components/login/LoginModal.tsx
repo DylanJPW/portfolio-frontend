@@ -1,19 +1,19 @@
-import { useContext, useState } from "react";
-import { Modal } from "../shared/Modal/Modal";
+import { useState } from "react";
 import type { ModalProps } from "react-bootstrap";
-import { login } from "./auth";
-import { AuthContext } from "./AuthContext";
+import { Modal } from "../shared/Modal/Modal";
+import { useAuth } from "./AuthContext";
+import { loginRequest } from "./utils";
 
 export const LoginModal = ({
   showModal,
   setShowModal,
 }: Partial<ModalProps>) => {
+  const { login } = useAuth();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-  const { setIsLoggedIn, setToken } = useContext(AuthContext);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,11 +21,9 @@ export const LoginModal = ({
     setError(null);
 
     try {
-      const token = await login(username, password);
-      localStorage.setItem("jwt", token);
+      const authToken = await loginRequest(username, password);
+      login(authToken);
       setShowModal(false);
-      setIsLoggedIn(true);
-      setToken(token);
     } catch {
       setError("Login failed");
     } finally {

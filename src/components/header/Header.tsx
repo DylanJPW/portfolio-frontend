@@ -41,28 +41,19 @@ const LoginButton = ({
   );
 };
 
-const LogoutButton = ({
-  setIsLoggedIn,
-  setToken,
-}: {
-  setIsLoggedIn: (value: boolean) => void;
-  setToken: (value: string | null) => void;
-}) => {
+const LogoutButton = ({ logout }: { logout: () => void }) => {
   return (
     <div
       className="d-flex align-items-center cursor-pointer"
-      onClick={() => {
-        setIsLoggedIn(false);
-        setToken(null);
-      }}
+      onClick={() => logout()}
     >
-      Logout
+      Log Out
     </div>
   );
 };
 
 export const Header = () => {
-  const { isLoggedIn, setIsLoggedIn, setToken } = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
@@ -90,7 +81,7 @@ export const Header = () => {
           </Nav>
           <div className="flex flex-row gap-3">
             {isLoggedIn ? (
-              <LogoutButton setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
+              <LogoutButton logout={logout} />
             ) : (
               <LoginButton setShowLoginModal={setShowLoginModal} />
             )}

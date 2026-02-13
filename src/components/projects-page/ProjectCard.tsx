@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import { type Project } from "./types";
 import { useAppDispatch } from "../../config/store";
 import { deleteProject, getProjects } from "./projects.reducer";
+import { useAuth } from "../login/AuthContext";
 
 interface ProjectCardProps extends Project {
   setShowEditModal: (value: boolean) => void;
@@ -21,6 +22,8 @@ export const ProjectCard = ({
   isOverview = false,
 }: ProjectCardProps) => {
   const dispatch = useAppDispatch();
+  const { isLoggedIn } = useAuth();
+  const showAdminButtons = !isOverview && isLoggedIn;
 
   function handleOnClickEdit() {
     setSelectedProjectId(id);
@@ -47,7 +50,7 @@ export const ProjectCard = ({
       <p className="project-description">{description}</p>
       <div className="project-repo-link">Link to Git Repo: {repoLink}</div>
       <div className="project-tags">Tags: {tags?.join(", ")}</div>
-      {!isOverview && (
+      {showAdminButtons && (
         <div className="project-buttons-container d-flex flex-row">
           <Button
             className="me-3"

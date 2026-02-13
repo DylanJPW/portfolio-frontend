@@ -6,8 +6,8 @@ import { Button } from "react-bootstrap";
 import { AddProjectModal } from "./AddProjectModal";
 import { type Project } from "./types";
 import { Section } from "../shared/Section";
-import "./ProjectsSection.scss";
 import { AuthContext } from "../login/AuthContext";
+import "./ProjectsSection.scss";
 
 interface ProjectsPageProps {
   isOverview?: boolean;
