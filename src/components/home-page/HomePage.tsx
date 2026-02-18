@@ -1,21 +1,17 @@
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../../config/store";
 import { AboutMePage } from "./AboutMeSection";
 import { ExperienceSection } from "./ExperienceSection";
 import { SkillsSection } from "./SkillsSection";
-import { getLatestCV } from "../cv/edit-page.reducer";
 import { ProjectsSection } from "../projects-page/ProjectsSection";
+import { useEditPage } from "../cv/useEditPage";
 import "./HomePage.scss";
 
 export const HomePage = () => {
-  const dispatch = useAppDispatch();
-  const { pageContent, pageContentLoaded } = useAppSelector(
-    (state) => state.cv,
-  );
+  const { pageContent, pageContentLoaded, getLatestCV } = useEditPage();
 
   useEffect(() => {
-    dispatch(getLatestCV());
+    if (!pageContentLoaded) getLatestCV();
   }, []);
 
   if (!pageContentLoaded) {

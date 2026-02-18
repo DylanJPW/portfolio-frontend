@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
 import { useProjects } from "./useProjects";

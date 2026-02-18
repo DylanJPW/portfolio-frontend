@@ -1,7 +1,6 @@
+import { useEffect, useMemo, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { type Project } from "./types";
-import { useEffect, useMemo, useState } from "react";
-import { useAppDispatch } from "../../config/store";
 
 interface AddProjectModalProps {
   show: boolean;
@@ -18,8 +17,6 @@ export const AddProjectModal = ({
   updateProject,
   addProject,
 }: AddProjectModalProps) => {
-  const dispatch = useAppDispatch();
-
   const [newProject, setNewProject] = useState<Project>({} as Project);
 
   useEffect(() => {
