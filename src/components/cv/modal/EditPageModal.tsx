@@ -1,6 +1,4 @@
 import { Button, Form, Modal, Spinner } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../../../config/store";
-import { getLatestCV, getParsedCV, saveCV } from "../edit-page.reducer";
 import { useEffect, useRef, useState } from "react";
 import {
   type CVObject,
@@ -10,6 +8,7 @@ import {
 } from "../types";
 import { SkillItemForm } from "./SkillItemForm";
 import { ExperienceItemForm } from "./ExperienceItemForm";
+import { useEditPage } from "../useEditPage";
 import "./EditPageModal.scss";
 
 const defaultSkillItem: SkillObject = {
@@ -33,10 +32,14 @@ interface CVUploadModalProps {
 }
 
 export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
-  const dispatch = useAppDispatch();
-  const { parsedCV, pageContent, parsedCVLoaded } = useAppSelector(
-    (state) => state.cv,
-  );
+  const {
+    parsedCV,
+    pageContent,
+    parsedCVLoaded,
+    getParsedCV,
+    saveCV,
+    getLatestCV,
+  } = useEditPage();
 
   const [formContent, setFormContent] = useState<CVObject>(pageContent);
   const [cvFile, setCVFile] = useState<File | undefined>(undefined);
@@ -100,7 +103,7 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   }
 
   function handleUploadCV() {
-    dispatch(getParsedCV(cvFile as File));
+    getParsedCV(cvFile as File);
   }
 
   function handleOnClose() {
@@ -108,8 +111,8 @@ export const CVUploadModal = ({ show, setShow }: CVUploadModalProps) => {
   }
 
   async function handleSubmit() {
-    await dispatch(saveCV(formContent));
-    dispatch(getLatestCV());
+    await saveCV(formContent);
+    getLatestCV();
     handleOnClose();
   }
 
