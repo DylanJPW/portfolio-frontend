@@ -1,4 +1,4 @@
-import { type ProjectsPageInitialState } from "../components/projects-page/projects.reducer";
+import { type ProjectsPageInitialState } from "../components/projects-page/useProjects";
 
 export interface RootState {
   projects: ProjectsPageInitialState;

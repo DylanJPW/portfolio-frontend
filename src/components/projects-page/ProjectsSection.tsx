@@ -1,8 +1,7 @@
-import { ProjectCard } from "./ProjectCard";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { getProjects } from "./projects.reducer";
-import { useAppDispatch, useAppSelector } from "../../config/store";
 import { Button } from "react-bootstrap";
+import { ProjectCard } from "./ProjectCard";
+import { useProjects } from "./useProjects";
 import { AddProjectModal } from "./AddProjectModal";
 import { type Project } from "./types";
 import { Section } from "../shared/Section";
@@ -14,12 +13,9 @@ interface ProjectsPageProps {
   projectLimit?: number;
 }
 
-export const ProjectsSection = ({
-  isOverview = false,
-  projectLimit = 3,
-}: ProjectsPageProps) => {
-  const dispatch = useAppDispatch();
-  const { projects, loaded } = useAppSelector((state) => state.projects);
+export const ProjectsSection = ({ projectLimit = 3 }: ProjectsPageProps) => {
+  const { projects, loaded, addProject, deleteProject, updateProject } =
+    useProjects();
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedProjectId, setSelectedProjectId] = useState<
@@ -27,7 +23,6 @@ export const ProjectsSection = ({
   >(undefined);
 
   const { isLoggedIn } = useContext(AuthContext);
-  const showAddProjectButton = !isOverview && isLoggedIn;
 
   const selectedProject = useMemo<Project>(
     () =>
@@ -35,12 +30,6 @@ export const ProjectsSection = ({
       ({} as Project),
     [selectedProjectId],
   );
-
-  useEffect(() => {
-    if (!loaded) {
-      dispatch(getProjects());
-    }
-  }, []);
 
   function handleOnClickAdd() {
     setSelectedProjectId(undefined);
@@ -52,7 +41,7 @@ export const ProjectsSection = ({
       <div className="container-fluid d-flex flex-column text-center align-items-center justify-content-center screen-height">
         <h1>Projects</h1>
         <p>This is the projects page content.</p>
-        {showAddProjectButton && (
+        {isLoggedIn && (
           <Button variant="primary" onClick={() => handleOnClickAdd()}>
             Add Project
           </Button>
@@ -67,7 +56,7 @@ export const ProjectsSection = ({
                   {...project}
                   setShowEditModal={setShowModal}
                   setSelectedProjectId={setSelectedProjectId}
-                  isOverview={isOverview}
+                  deleteProject={deleteProject}
                 />
               ))}
         </div>
@@ -75,6 +64,8 @@ export const ProjectsSection = ({
           show={showModal}
           setShow={setShowModal}
           project={selectedProject}
+          updateProject={updateProject}
+          addProject={addProject}
         />
       </div>
     </Section>

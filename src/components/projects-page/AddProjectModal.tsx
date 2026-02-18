@@ -2,18 +2,21 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { type Project } from "./types";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "../../config/store";
-import { addProject, getProjects, updateProject } from "./projects.reducer";
 
 interface AddProjectModalProps {
   show: boolean;
   setShow: (value: boolean) => void;
   project: Project;
+  updateProject: (value: Project) => void;
+  addProject: (value: Project) => void;
 }
 
 export const AddProjectModal = ({
   show,
   setShow,
   project,
+  updateProject,
+  addProject,
 }: AddProjectModalProps) => {
   const dispatch = useAppDispatch();
 
@@ -29,10 +32,8 @@ export const AddProjectModal = ({
   }
 
   async function handleOnSave() {
-    if (!!project?.id) await dispatch(updateProject(newProject));
-    if (!project?.id) await dispatch(addProject(newProject));
-    dispatch(getProjects());
-    setShow(false);
+    if (!!project?.id) updateProject(newProject);
+    if (!project?.id) addProject(newProject);
   }
 
   const title = useMemo<string>(
