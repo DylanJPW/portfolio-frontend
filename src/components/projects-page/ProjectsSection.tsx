@@ -38,7 +38,7 @@ export const ProjectsSection = ({ projectLimit = 3 }: ProjectsPageProps) => {
 
   return (
     <Section id="projects-section" title="Projects">
-      <div className="container-fluid d-flex flex-column text-center align-items-center justify-content-center screen-height">
+      <div className="container-fluid d-flex flex-column text-center items-center screen-height">
         <h1>Projects</h1>
         <p>This is the projects page content.</p>
         {isLoggedIn && (
