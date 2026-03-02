@@ -64,7 +64,7 @@ export const Header = () => {
 
   return (
     <>
-      <Navbar className="header bg-body-secondary w-100 px-3 navbar-sticky">
+      <Navbar className="header bg-body-secondary w-100 px-3">
         <Navbar.Brand href="/">My Portfolio</Navbar.Brand>
         <Navbar.Collapse className="justify-content-between">
           <Nav className="align-items-center">
