@@ -12,7 +12,9 @@ export const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(
+    localStorage.getItem("jwt") || null,
+  );
 
   const login = (newToken: string) => {
     localStorage.setItem("jwt", newToken);
