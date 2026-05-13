@@ -31,6 +31,7 @@ export const AddProjectModal = ({
   async function handleOnSave() {
     if (!!project?.id) updateProject(newProject);
     if (!project?.id) addProject(newProject);
+    setShow(false);
   }
 
   const title = useMemo<string>(
