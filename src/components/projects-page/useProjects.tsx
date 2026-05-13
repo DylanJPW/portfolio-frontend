@@ -23,14 +23,17 @@ export function useProjects() {
 
   const addProject = async (project: Project) => {
     await axios.post(requestURL + "/addProject", project);
+    getProjects();
   };
 
   const deleteProject = async (id: number) => {
     await axios.delete(requestURL + `/deleteProject/${id}`);
+    getProjects();
   };
 
   const updateProject = async (project: Project) => {
     await axios.put(requestURL + `/updateProject/${project.id}`, project);
+    getProjects();
   };
 
   useEffect(() => {
